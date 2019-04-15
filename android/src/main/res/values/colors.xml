@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="message_sent_startColor">#609cf8</color>
+    <color name="message_sent_endColor">#7455f3</color>
+    <color name="message_received_backgroundColor">#ebebeb</color>
+    <color name="message_infos_call">#7f7f7f</color>
+    <color name="background_light_gray">#F9FAFD</color>
+    <color name="message_infos_call_ended">#777</color>
+</resources>
