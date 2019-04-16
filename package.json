@@ -1,12 +1,12 @@
 {
   "name": "react-native-xchat",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Chat implementation in react native environment",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./build.sh",
-    "publish": "npm run build && cd build/dist && npm publish"
+    "lib-build": "./build.sh",
+    "lib-publish": "npm run lib-build && cd build/dist && npm publish"
   },
   "keywords": [
     "react-native"
