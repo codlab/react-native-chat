@@ -3,11 +3,11 @@
 
 ## Getting started
 
-`$ npm install react-native-chat --save`
+`$ npm install react-native-xchat --save`
 
 ### Mostly automatic installation
 
-`$ react-native link react-native-chat`
+`$ react-native link react-native-xchat`
 
 ### Manual installation
 
