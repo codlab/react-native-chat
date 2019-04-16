@@ -8,7 +8,7 @@ import eu.codlab.chat.ui.views.ChatView;
 public class RNChatViewManager extends SimpleViewManager<ChatView> {
     @Override
     public String getName() {
-        return RNChatViewManager.class.getSimpleName();
+        return "RNChatView";
     }
 
     @Override

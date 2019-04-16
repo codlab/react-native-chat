@@ -62,6 +62,11 @@ public class ChatView extends FrameLayout {
     private void init() {
         controller = ModelControllerFactory.get(ChatMessageController.class);
 
+        if(null == controller) {
+            ModelControllerFactory.init(getContext());
+            controller = ModelControllerFactory.get(ChatMessageController.class);
+        }
+
         View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_item_list, this, false);
 
         addView(view);
