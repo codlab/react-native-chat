@@ -1,6 +1,1 @@
-
-import { NativeModules } from 'react-native';
-
-const { RNChat } = NativeModules;
-
-export default RNChat;
+export { default as ChatView } from "./lib/ChatView";
