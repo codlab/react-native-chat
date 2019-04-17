@@ -74,7 +74,6 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textSize="12dp"
-                        android:textStyle="bold"
                         tools:text="Connecté" />
                     <View
                         android:layout_width="8dp"
@@ -109,7 +108,6 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textSize="12dp"
-                        android:textStyle="bold"
                         tools:text="Fonctionnel" />
                     <View
                         android:layout_width="8dp"
