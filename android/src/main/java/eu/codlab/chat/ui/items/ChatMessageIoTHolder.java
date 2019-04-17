@@ -39,7 +39,6 @@ public class ChatMessageIoTHolder extends AbstractMessageHolder {
 
         avatar = itemView.findViewById(R.id.message_avatar);
         content = itemView.findViewById(R.id.message_content);
-        date = itemView.findViewById(R.id.message_date);
 
         additionnal = itemView.findViewById(R.id.message_additionnal);
         state_1 = itemView.findViewById(R.id.state_1);
@@ -51,8 +50,6 @@ public class ChatMessageIoTHolder extends AbstractMessageHolder {
     @Override
     public void onBindViewHolder(final ChatMessage message, int position) {
         content.setText(message.getContent());
-
-        date.setText(message.getCreatedAt().toGMTString());
 
         additionnal.setText(message.getAdditionnal());
 
