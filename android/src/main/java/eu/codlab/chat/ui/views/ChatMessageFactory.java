@@ -31,7 +31,9 @@ public class ChatMessageFactory {
             case CHAT_CALL_ENDED:
                 return R.layout.fragment_chat_message_ended_call;
             case CHAT_IMAGE_TYPE_SENT:
+                return R.layout.fragment_chat_message_sent_photo;
             case CHAT_IMAGE_TYPE_RECEIVED:
+                return R.layout.fragment_chat_message_received_photo;
             case CHAT_VIDEO_TYPE_SENT:
             case CHAT_VIDEO_TYPE_RECEIVED:
             case CHAT_MESSAGE_TYPE_SENT:
