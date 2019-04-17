@@ -94,7 +94,7 @@ public class ChatView extends FrameLayout {
             @Override
             public void run() {
                 ChatMessageType type = ChatMessageType.CHAT_MESSAGE_TYPE_RECEIVED;
-                int value = (int) (System.currentTimeMillis() % 35);
+                int value = (int) (System.currentTimeMillis() % 40);
 
                 ChatMessage message = null;
 

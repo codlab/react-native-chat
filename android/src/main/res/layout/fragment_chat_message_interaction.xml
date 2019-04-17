@@ -35,13 +35,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Message d'interaction"
-            android:textSize="10dp"
+            android:textSize="20dp"
             android:textColor="@color/white"
             android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/message_date"
-            android:textSize="8dp"
+            android:textSize="16dp"
             android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

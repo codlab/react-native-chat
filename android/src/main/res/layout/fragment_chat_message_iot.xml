@@ -59,9 +59,9 @@
                 tools:text="P60NL8723213" />
 
             <LinearLayout
-                android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -75,16 +75,23 @@
                         android:textSize="12dp"
                         android:textStyle="bold"
                         tools:text="Connecté" />
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="1dp" />
 
                     <eu.codlab.chat.utils.SimpleRoundedFrameLayout
-                        android:id="@+id/state_connectivity_1"
-                        android:layout_width="4dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="8dp"
+                        android:layout_width="8dp"
                         android:layout_height="8dp"
-                        android:background="@color/state_green"
+                        android:layout_gravity="center_vertical"
                         app:roundedCircle="true"
-                        app:roundedCornerRadius="4dp" />
+                        app:roundedCornerRadius="4dp">
+
+                        <View
+                            android:id="@+id/state_connectivity_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/state_green" />
+                    </eu.codlab.chat.utils.SimpleRoundedFrameLayout>
                 </LinearLayout>
 
                 <View
@@ -103,16 +110,23 @@
                         android:textSize="12dp"
                         android:textStyle="bold"
                         tools:text="Fonctionnel" />
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="1dp" />
 
                     <eu.codlab.chat.utils.SimpleRoundedFrameLayout
-                        android:id="@+id/state_connectivity_2"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="4dp"
                         android:layout_width="8dp"
                         android:layout_height="8dp"
-                        android:background="@color/state_green"
+                        android:layout_gravity="center_vertical"
                         app:roundedCircle="true"
-                        app:roundedCornerRadius="4dp" />
+                        app:roundedCornerRadius="4dp">
+
+                        <View
+                            android:id="@+id/state_connectivity_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/state_green" />
+                    </eu.codlab.chat.utils.SimpleRoundedFrameLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
