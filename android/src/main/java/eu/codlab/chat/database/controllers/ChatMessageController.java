@@ -56,6 +56,11 @@ public class ChatMessageController extends AbstractController<ChatMessage, Long>
         message.setContent(cursor.getStringOrDefault("content"));
         message.setType(cursor.getIntOrDefault("type"));
         message.setUuid(cursor.getStringOrDefault("uuid"));
+        message.setState_1(cursor.getStringOrDefault("state_1"));
+        message.setState_2(cursor.getStringOrDefault("state_2"));
+        message.setState_connectivity_1(cursor.getBooleanOrDefault("state_connectivity_1", false));
+        message.setState_connectivity_2(cursor.getBooleanOrDefault("state_connectivity_2", true));
+        message.setImage(cursor.getStringOrDefault("image"));
 
         long sentAt = cursor.getLongOrDefault("sentAt");
         long createdAt = cursor.getLongOrDefault("createdAt");

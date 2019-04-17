@@ -94,7 +94,7 @@ public class ChatView extends FrameLayout {
             @Override
             public void run() {
                 ChatMessageType type = ChatMessageType.CHAT_MESSAGE_TYPE_RECEIVED;
-                int value = (int) (System.currentTimeMillis() % 30);
+                int value = (int) (System.currentTimeMillis() % 35);
 
                 if(value < 5) {
                     type = ChatMessageType.CHAT_MESSAGE_TYPE_SENT;
@@ -106,6 +106,8 @@ public class ChatView extends FrameLayout {
                     type = ChatMessageType.CHAT_CALL_NO_ANSWER;
                 } else if(value < 30) {
                     type = ChatMessageType.CHAT_INTERACTION;
+                } else if(value < 35) {
+                    type = ChatMessageType.CHAT_IOT;
                 }
 
                 new ChatMessage(null, type, "test", new User()).save();

@@ -25,6 +25,30 @@ public class ChatMessage extends BaseModel {
     @Column(defaultValue = "0")
     private String content;
 
+    @Nullable
+    @Column
+    private String additionnal;
+
+    @Nullable
+    @Column
+    private String state_1;
+
+    @Nullable
+    @Column
+    private String state_2;
+
+    @Nullable
+    @Column
+    private boolean state_connectivity_1;
+
+    @Nullable
+    @Column
+    private boolean state_connectivity_2;
+
+    @Nullable
+    @Column
+    private String image;
+
     @Column
     private Date createdAt;
 
@@ -116,6 +140,58 @@ public class ChatMessage extends BaseModel {
     public User getSender() {
         //TODO save current user temporary ?
         return ModelControllerFactory.get(UserController.class).getItemFrom(uuid);
+    }
+
+    @Nullable
+    public String getAdditionnal() {
+        return additionnal;
+    }
+
+    public void setAdditionnal(@Nullable String additionnal) {
+        this.additionnal = additionnal;
+    }
+
+    @Nullable
+    public String getState_1() {
+        return state_1;
+    }
+
+    public void setState_1(@Nullable String state_1) {
+        this.state_1 = state_1;
+    }
+
+    @Nullable
+    public String getState_2() {
+        return state_2;
+    }
+
+    public void setState_2(@Nullable String state_2) {
+        this.state_2 = state_2;
+    }
+
+    public boolean isState_connectivity_1() {
+        return state_connectivity_1;
+    }
+
+    public void setState_connectivity_1(boolean state_connectivity_1) {
+        this.state_connectivity_1 = state_connectivity_1;
+    }
+
+    public boolean isState_connectivity_2() {
+        return state_connectivity_2;
+    }
+
+    public void setState_connectivity_2(boolean state_connectivity_2) {
+        this.state_connectivity_2 = state_connectivity_2;
+    }
+
+    @Nullable
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(@Nullable String image) {
+        this.image = image;
     }
 
     public long getId() {

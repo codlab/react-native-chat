@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/chat_margin_vertical"
+    android:paddingBottom="@dimen/chat_margin_vertical">
+
+
+    <eu.codlab.chat.utils.SimpleRoundedFrameLayout
+        android:layout_width="@dimen/chat_message_avatar_size"
+        android:layout_height="@dimen/chat_message_avatar_size"
+        android:layout_marginRight="@dimen/chat_padding_horizontal"
+        app:roundedCircle="true"
+        app:roundedCornerRadius="@dimen/chat_message_avatar_radius">
+
+        <ImageView
+            android:id="@+id/message_avatar"
+            android:layout_width="@dimen/chat_message_avatar_size"
+            android:layout_height="@dimen/chat_message_avatar_size"
+            android:background="#777777" />
+    </eu.codlab.chat.utils.SimpleRoundedFrameLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/message_iot_information"
+        android:elevation="2dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="32dp"
+            android:src="@drawable/iot" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/message_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="10dp"
+                android:textStyle="bold"
+                tools:text="Message d'interaction" />
+
+            <TextView
+                android:id="@+id/message_additionnal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="8dp"
+                tools:text="P60NL8723213" />
+
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/state_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="6dp"
+                        android:textStyle="bold"
+                        tools:text="Connecté" />
+
+                    <eu.codlab.chat.utils.SimpleRoundedFrameLayout
+                        android:id="@+id/state_connectivity_1"
+                        android:layout_width="4dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="4dp"
+                        android:layout_height="4dp"
+                        android:background="@color/state_green"
+                        app:roundedCircle="true"
+                        app:roundedCornerRadius="2dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="12dp"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/state_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="6dp"
+                        android:textStyle="bold"
+                        tools:text="Fonctionnel" />
+
+                    <eu.codlab.chat.utils.SimpleRoundedFrameLayout
+                        android:id="@+id/state_connectivity_2"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="4dp"
+                        android:layout_width="4dp"
+                        android:layout_height="4dp"
+                        android:background="@color/state_green"
+                        app:roundedCircle="true"
+                        app:roundedCornerRadius="2dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -7,4 +7,7 @@
     <color name="background_light_gray">#F9FAFD</color>
     <color name="message_infos_call_ended">#777</color>
     <color name="white">@android:color/white</color>
+    <color name="black">@android:color/black</color>
+    <color name="state_green">#7ed321</color>
+    <color name="state_red">#d0021b</color>
 </resources>
