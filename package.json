@@ -1,6 +1,6 @@
 {
   "name": "react-native-xchat",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "description": "Chat implementation in react native environment",
   "main": "index.js",
   "scripts": {
