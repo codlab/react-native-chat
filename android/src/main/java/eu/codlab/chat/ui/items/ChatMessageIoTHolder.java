@@ -40,6 +40,12 @@ public class ChatMessageIoTHolder extends AbstractMessageHolder {
         avatar = itemView.findViewById(R.id.message_avatar);
         content = itemView.findViewById(R.id.message_content);
         date = itemView.findViewById(R.id.message_date);
+
+        additionnal = itemView.findViewById(R.id.message_additionnal);
+        state_1 = itemView.findViewById(R.id.state_1);
+        state_2 = itemView.findViewById(R.id.state_2);
+        state_connectivity_1 = itemView.findViewById(R.id.state_connectivity_1);
+        state_connectivity_2 = itemView.findViewById(R.id.state_connectivity_2);
     }
 
     @Override
