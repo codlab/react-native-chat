@@ -94,21 +94,21 @@ public class ChatView extends FrameLayout {
             @Override
             public void run() {
                 ChatMessageType type = ChatMessageType.CHAT_MESSAGE_TYPE_RECEIVED;
-                int value = (int) (System.currentTimeMillis() % 40);
+                int value = (int) (System.currentTimeMillis() % 30);
 
                 ChatMessage message = null;
 
                 if (value < 5) {
                     type = ChatMessageType.CHAT_MESSAGE_TYPE_SENT;
-                } else if (value < 10) {
+                } else if (value < 8) {
                     type = ChatMessageType.CHAT_CALL_ENDED;
-                } else if (value < 15) {
+                } else if (value < 10) {
                     type = ChatMessageType.CHAT_CALL_MISSED;
-                } else if (value < 20) {
+                } else if (value < 12) {
                     type = ChatMessageType.CHAT_CALL_NO_ANSWER;
-                } else if (value < 30) {
+                } else if (value < 15) {
                     type = ChatMessageType.CHAT_INTERACTION;
-                } else if (value < 35) {
+                } else if (value < 20) {
                     type = ChatMessageType.CHAT_IOT;
                     message = new ChatMessage(null, type, "test", new User());
                     message.setContent("Paraton@ir 60");
@@ -117,9 +117,9 @@ public class ChatView extends FrameLayout {
                     message.setState_2("Fonctionnel");
                     message.setState_connectivity_1(true);
                     message.setState_connectivity_2(false);
-                } else if (value < 38) {
+                } else if (value < 25) {
                     type = ChatMessageType.CHAT_IMAGE_TYPE_RECEIVED;
-                } else if (value < 40) {
+                } else if (value < 30) {
                     type = ChatMessageType.CHAT_IMAGE_TYPE_SENT;
                 }
 

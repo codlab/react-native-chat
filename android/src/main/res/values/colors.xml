@@ -10,4 +10,5 @@
     <color name="black">@android:color/black</color>
     <color name="state_green">#7ed321</color>
     <color name="state_red">#d0021b</color>
+    <color name="message_sent_background">#137be3</color>
 </resources>
