@@ -12,7 +12,8 @@ public enum ChatMessageType {
     CHAT_VIDEO_TYPE_RECEIVED("video"),
     CHAT_CALL_ENDED("call_ended"),
     CHAT_CALL_MISSED("call_missed"),
-    CHAT_CALL_NO_ANSWER("call_no_answer");
+    CHAT_CALL_NO_ANSWER("call_no_answer"),
+    CHAT_INTERACTION("chat_interation");
 
     private final static String TAG = ChatMessageType.class.getSimpleName();
     private final static SparseArray<ChatMessageType> CACHE = new SparseArray<>();
@@ -25,7 +26,8 @@ public enum ChatMessageType {
             CHAT_VIDEO_TYPE_RECEIVED,
             CHAT_CALL_ENDED,
             CHAT_CALL_MISSED,
-            CHAT_CALL_NO_ANSWER
+            CHAT_CALL_NO_ANSWER,
+            CHAT_INTERACTION
     };
 
     public static void init() {

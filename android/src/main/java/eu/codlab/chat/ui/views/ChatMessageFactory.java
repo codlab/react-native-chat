@@ -9,6 +9,7 @@ import eu.codlab.chat.ui.items.AbstractMessageHolder;
 import eu.codlab.chat.ui.items.ChatImageHolder;
 import eu.codlab.chat.ui.items.ChatMessageCallInfoHolder;
 import eu.codlab.chat.ui.items.ChatMessageHolder;
+import eu.codlab.chat.ui.items.ChatMessageInteractionHolder;
 import eu.codlab.chat.ui.items.ChatVideoHolder;
 
 public class ChatMessageFactory {
@@ -18,6 +19,8 @@ public class ChatMessageFactory {
 
     public static int getResourceId(ChatMessageType type) {
         switch (type) {
+            case CHAT_INTERACTION:
+                return R.layout.fragment_chat_message_interaction;
             case CHAT_CALL_NO_ANSWER:
                 return R.layout.fragment_chat_message_no_answer_call;
             case CHAT_CALL_MISSED:
@@ -40,6 +43,8 @@ public class ChatMessageFactory {
         int resource = getResourceId(type);
 
         switch (type) {
+            case CHAT_INTERACTION:
+                return new ChatMessageInteractionHolder(resource, parent);
             case CHAT_CALL_ENDED:
             case CHAT_CALL_MISSED:
             case CHAT_CALL_NO_ANSWER:
