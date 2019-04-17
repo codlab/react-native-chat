@@ -2,6 +2,7 @@ package eu.codlab.chat.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.RectF;
@@ -12,11 +13,14 @@ import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
+import eu.codlab.chat.R;
+
 @SuppressLint("AppCompatCustomView")
 public class SimpleRoundedFrameLayout extends FrameLayout {
     private Path path = new Path();
     private RectF rect = new RectF();
     private boolean isCircle;
+    private float cornerRadius;
 
     public SimpleRoundedFrameLayout(@NonNull Context context) {
         super(context);
@@ -44,7 +48,10 @@ public class SimpleRoundedFrameLayout extends FrameLayout {
     }
 
     public void init(Context context, @Nullable AttributeSet attrs) {
-        isCircle = true;
+        TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.SimpleRoundedFrameLayout);
+        isCircle = attributes.getBoolean(R.styleable.SimpleRoundedFrameLayout_roundedCircle, true);
+        cornerRadius = attributes.getDimension(R.styleable.SimpleRoundedFrameLayout_roundedCornerRadius, 0);
+        attributes.recycle();
     }
 
     @Override
@@ -69,6 +76,13 @@ public class SimpleRoundedFrameLayout extends FrameLayout {
         return this;
     }
 
+    public SimpleRoundedFrameLayout setCornerRadius(float cornerRadius) {
+        this.cornerRadius = cornerRadius;
+
+        invalidatePath();
+        return this;
+    }
+
     private void invalidatePath() {
         int width = getWidth();
         int height = getHeight();
@@ -88,6 +102,11 @@ public class SimpleRoundedFrameLayout extends FrameLayout {
             path.close();
         } else {
             path.reset();
+            float[] radii = {cornerRadius, cornerRadius, cornerRadius, cornerRadius,
+                    cornerRadius, cornerRadius, cornerRadius, cornerRadius};
+            rect.set(0, 0, width, height);
+            path.addRoundRect(rect, radii, Path.Direction.CW);
+            path.close();
         }
     }
 }

@@ -35,6 +35,8 @@
 
 
             <eu.codlab.chat.utils.SimpleRoundedFrameLayout
+                app:roundedCornerRadius="4dp"
+                app:roundedCircle="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
