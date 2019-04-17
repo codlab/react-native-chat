@@ -39,6 +39,8 @@ public class ChatMessage extends BaseModel {
     private String uuid;
 
     public ChatMessage() {
+        createdAt = new Date();
+        sentAt = null;
     }
 
     public ChatMessage(Conversation conversation, ChatMessageType type, String content, User sender) {
