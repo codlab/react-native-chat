@@ -1,5 +1,6 @@
 package eu.codlab.chat.database.models;
 
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -56,6 +57,17 @@ public enum ChatMessageType {
             type = CHAT_MESSAGE_TYPE_SENT;
         }
         return type;
+    }
+
+    public static ChatMessageType fromType(@Nullable String type) {
+        if (null != type) {
+            for (ChatMessageType in_cache : INFOS) {
+                if(in_cache.getType().equalsIgnoreCase(type)) {
+                    return in_cache;
+                }
+            }
+        }
+        return CHAT_MESSAGE_TYPE_SENT;
     }
 
     public String getType() {

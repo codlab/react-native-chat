@@ -2,6 +2,7 @@ package eu.codlab.chat.database.models;
 
 import android.support.annotation.NonNull;
 
+import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
@@ -18,11 +19,34 @@ public class Conversation extends BaseModel {
     @PrimaryKey(autoincrement = true)
     private long id;
 
+    @NonNull
+    @Column
+    private String uuid;
+
+    @Column
+    private String name;
+
+    private List<User> users = new ArrayList<>();
+
     public Conversation() {
+        uuid = "";
     }
 
-    public Conversation(List<User> users) {
-        this();
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @NonNull
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(@NonNull String uuid) {
+        this.uuid = uuid;
     }
 
     public long getId() {
@@ -42,6 +66,40 @@ public class Conversation extends BaseModel {
         for (ConversationUser user : users) {
             result.add(user.getUser());
         }
+
+        if(null == this.users) this.users = result;
+
         return result;
+    }
+
+    public void setUsers(@NonNull List<User> users) {
+        List<User> still_in = new ArrayList<>();
+        List<User> to_remove = new ArrayList<>();
+
+        for (User user : this.users) {
+            if(!users.contains(user)) to_remove.add(user);
+        }
+
+        for (User user : to_remove) {
+            ModelControllerFactory.get(ConversationUserController.class)
+                    .deleteLink(this, user);
+        }
+
+        this.users = users;
+    }
+
+    public boolean hasUser(@NonNull User user) {
+        return users.contains(user);
+    }
+
+    public boolean addUser(@NonNull User user) {
+        if(!hasUser(user)) {
+            ModelControllerFactory.get(ConversationUserController.class)
+                    .createLink(this, user);
+            users.add(user);
+
+            return true;
+        }
+        return false;
     }
 }

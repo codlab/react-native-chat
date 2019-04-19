@@ -1,9 +1,12 @@
 package eu.codlab.chat.database.controllers;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.raizlabs.android.dbflow.sql.language.property.Property;
 import com.raizlabs.android.dbflow.structure.BaseModel;
+
+import java.util.List;
 
 import eu.codlab.chat.database.models.User;
 import eu.codlab.chat.database.models.User_Table;
@@ -34,5 +37,18 @@ public class UserController extends AbstractController<User, String> {
         if (null == left && left == right) return false;
         if (null == left || null == right) return false;
         return left.getUuid().equals(right.getUuid());
+    }
+
+    @NonNull
+    public User getOrCreate(@NonNull User user) {
+        String uuid = user.getUuid();
+        User cache = getItemFrom(uuid);
+
+        if(null == cache) {
+            user.save();
+            saveItem(user.getUuid(), user);
+            return user;
+        }
+        return cache;
     }
 }

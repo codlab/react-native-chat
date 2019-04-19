@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import eu.codlab.chat.database.models.User;
+
 public abstract class AbstractController<T extends BaseModel, KEY_TYPE> {
 
     private HashMap<KEY_TYPE, T> mCache;
@@ -48,13 +50,21 @@ public abstract class AbstractController<T extends BaseModel, KEY_TYPE> {
 
     protected abstract Class<? extends BaseModel> getTableClass();
 
+    public List<T> list() {
+        List<T> result = (List<T>) new Select()
+                .from(getTableClass())
+                .queryList();
+
+        return listFromDatabaseThroughCache(result);
+    }
+
     protected List<T> listFromDatabaseThroughCache(@NonNull List<T> list) {
         List<T> new_list = new ArrayList<>();
 
         for (T item : list) {
             KEY_TYPE id = getId(item);
             T cache = getItemFromCache(id);
-            if(null == cache) {
+            if (null == cache) {
                 putItemInCache(id, item);
                 new_list.add(item);
             } else {

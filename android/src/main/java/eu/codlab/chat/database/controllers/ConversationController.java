@@ -1,12 +1,17 @@
 package eu.codlab.chat.database.controllers;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.raizlabs.android.dbflow.sql.language.Select;
 import com.raizlabs.android.dbflow.sql.language.property.Property;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import java.util.List;
+
 import eu.codlab.chat.database.models.Conversation;
 import eu.codlab.chat.database.models.Conversation_Table;
+import eu.codlab.chat.database.models.User;
 
 public class ConversationController extends AbstractController<Conversation, Long> {
     @Override
@@ -36,5 +41,38 @@ public class ConversationController extends AbstractController<Conversation, Lon
         if (null == left && null == right) return false;
         if (null == left || null == right) return false;
         return left.getId() == right.getId();
+    }
+
+    @NonNull
+    public Conversation getOrCreate(@NonNull Conversation conversation) {
+        List<Conversation> list = list();
+
+        for (Conversation conv : list) {
+            if (conv.getUuid().equalsIgnoreCase(conversation.getUuid())) {
+                return conv;
+            }
+        }
+        conversation.save();
+        saveItem(conversation.getId(), conversation);
+        return conversation;
+    }
+
+    public Conversation create(String uuid, String name) {
+        List<Conversation> list = new Select()
+                .from(Conversation.class)
+                .where(Conversation_Table.uuid.eq(uuid))
+                .queryList();
+
+        if (list.size() == 0) {
+            Conversation conversation = new Conversation();
+            conversation.setUuid(uuid);
+            conversation.setName(name);
+            conversation.save();
+            saveItem(conversation.getId(), conversation);
+
+            return conversation;
+        }
+
+        return list.get(0);
     }
 }

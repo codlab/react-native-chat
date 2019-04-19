@@ -58,22 +58,26 @@ public class ChatMessage extends BaseModel {
     @Column
     private long conversationId;
 
-    //TODO since senders are not known for now, simply set the information...
     @Column(defaultValue = "")
     private String uuid;
+
+    @Column(defaultValue = "")
+    private String sender;
 
     public ChatMessage() {
         createdAt = new Date();
         sentAt = null;
+        sender = "";
     }
 
-    public ChatMessage(Conversation conversation, ChatMessageType type, String content, User sender) {
+    public ChatMessage(Conversation conversation, ChatMessageType type, String uuid, String content, User sender) {
         this();
 
         if (null != conversation) this.conversationId = conversation.getId();
         this.type = type.ordinal();
         this.content = content;
-        this.uuid = sender.getUuid();
+        this.uuid = uuid;
+        this.sender = sender.getUuid();
     }
 
     public String getUuid() {
@@ -94,10 +98,6 @@ public class ChatMessage extends BaseModel {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public void setSender(User user) {
-        this.uuid = user.getUuid();
     }
 
     public int getType() {
@@ -136,10 +136,13 @@ public class ChatMessage extends BaseModel {
         this.conversationId = conversationId;
     }
 
+    public void setSender(User user) {
+        this.uuid = user.getUuid();
+    }
+
     @Nullable
     public User getSender() {
-        //TODO save current user temporary ?
-        return ModelControllerFactory.get(UserController.class).getItemFrom(uuid);
+        return ModelControllerFactory.get(UserController.class).getItemFrom(sender);
     }
 
     @Nullable
