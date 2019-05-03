@@ -37,9 +37,10 @@
 
 ## Usage
 ```javascript
-import RNChat from 'react-native-chat';
+import {
+	ConversationManager
+} from 'react-native-chat';
 
-// TODO: What to do with the module?
-RNChat;
+const conversationManager: ConversationManager = new ConversationManager();
 ```
   

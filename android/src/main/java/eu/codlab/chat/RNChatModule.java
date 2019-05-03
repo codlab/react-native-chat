@@ -75,11 +75,33 @@ public class RNChatModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void addUserToConversation(ReadableMap userJS, ReadableMap conversationJS, Promise promise) {
+        if (null != userJS && null != conversationJS) {
+            User user = userController.getOrCreate(TransformUser.fromMap(userJS));
+            Conversation conversation = conversationController.getOrCreate(TransformConversations.fromMap(conversationJS));
+
+            if (!conversation.hasUser(user)) {
+                conversation.addUser(user);
+                conversation.save();
+            }
+
+            promise.resolve(true);
+        } else {
+            promise.resolve(false);
+        }
+    }
+
+    @ReactMethod
     public void saveMessage(ReadableMap userJS, ReadableMap conversationJS, ReadableMap messageJS, Promise promise) {
-        if(null != userJS && null != conversationJS && null != messageJS) {
+        if (null != userJS && null != conversationJS && null != messageJS) {
             User user = userController.getOrCreate(TransformUser.fromMap(userJS));
             Conversation conversation = conversationController.getOrCreate(TransformConversations.fromMap(conversationJS));
             ChatMessage message = TransformMessage.fromMap(messageJS);
+
+            if (!conversation.hasUser(user)) {
+                conversation.addUser(user);
+                conversation.save();
+            }
 
             message.setConversationId(conversation.getId());
             message.setSender(user);
