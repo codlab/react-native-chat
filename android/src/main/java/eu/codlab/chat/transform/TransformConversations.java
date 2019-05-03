@@ -22,6 +22,7 @@ public final class TransformConversations {
         WritableMap map = new WritableNativeMap();
         map.putInt("id", (int) conversation.getId());
         map.putString("uuid", conversation.getUuid());
+        map.putString("name", conversation.getName());
         map.putArray("users", TransformUser.toMap(conversation.getUsers()));
 
         return map;
