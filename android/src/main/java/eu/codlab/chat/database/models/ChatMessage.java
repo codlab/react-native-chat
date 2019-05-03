@@ -143,11 +143,19 @@ public class ChatMessage extends BaseModel {
     }
 
     public void setSender(User user) {
-        this.uuid = user.getUuid();
+        setSender(user.getUuid());
+    }
+
+    public void setSender(String uuid) {
+        this.uuid = uuid;
+    }
+    @Nullable
+    public String getSender() {
+        return sender;
     }
 
     @Nullable
-    public User getSender() {
+    public User getSenderUser() {
         return ModelControllerFactory.get(UserController.class).getItemFrom(sender);
     }
 

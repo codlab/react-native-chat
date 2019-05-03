@@ -33,7 +33,7 @@ public class ChatMessageCallInfoHolder extends AbstractMessageHolder {
 
     @Override
     public void onBindViewHolder(final ChatMessage message, int position) {
-        User user = message.getSender();
+        User user = message.getSenderUser();
         String str = "%s";
 
         switch (message.getMessageType()) {

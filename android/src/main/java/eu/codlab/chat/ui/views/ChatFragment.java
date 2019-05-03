@@ -71,7 +71,7 @@ public class ChatFragment extends Fragment {
             }
         });
 
-        handler.post(new Runnable() {
+        /*andler.post(new Runnable() {
             @Override
             public void run() {
                 ChatMessageType type = ChatMessageType.CHAT_MESSAGE_TYPE_RECEIVED;
@@ -91,7 +91,7 @@ public class ChatFragment extends Fragment {
                 requery();
                 handler.postDelayed(this, 600);
             }
-        });
+        });*/
     }
 
     private void requery() {

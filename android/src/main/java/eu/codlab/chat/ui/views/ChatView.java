@@ -90,7 +90,7 @@ public class ChatView extends FrameLayout {
             }
         });
 
-        handler.post(new Runnable() {
+        /*handler.post(new Runnable() {
             @Override
             public void run() {
                 ChatMessageType type = ChatMessageType.CHAT_MESSAGE_TYPE_RECEIVED;
@@ -128,7 +128,7 @@ public class ChatView extends FrameLayout {
                 requery();
                 handler.postDelayed(this, 600);
             }
-        });
+        });*/
     }
 
     private void requery() {
