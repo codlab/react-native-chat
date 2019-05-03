@@ -37,6 +37,12 @@ public class ChatMessage extends BaseModel {
     @Column
     private String state_2;
 
+    @Column
+    private boolean error;
+
+    @Column
+    private boolean system;
+
     @Nullable
     @Column
     private boolean state_connectivity_1;
@@ -199,5 +205,21 @@ public class ChatMessage extends BaseModel {
 
     public long getId() {
         return id;
+    }
+
+    public boolean isError() {
+        return error;
+    }
+
+    public void setError(boolean error) {
+        this.error = error;
+    }
+
+    public boolean isSystem() {
+        return system;
+    }
+
+    public void setSystem(boolean system) {
+        this.system = system;
     }
 }

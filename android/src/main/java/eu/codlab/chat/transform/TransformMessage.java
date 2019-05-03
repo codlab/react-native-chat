@@ -30,6 +30,8 @@ public final class TransformMessage {
         map.putString("state_2", message.getState_2());
         map.putBoolean("state_connectivity_1", message.isState_connectivity_1());
         map.putBoolean("state_connectivity_2", message.isState_connectivity_2());
+        map.putBoolean("error", message.isError());
+        map.putBoolean("system", message.isSystem());
         map.putString("type", message.getMessageType().getType());
         map.putString("additionnal", message.getAdditionnal());
         if (null != message.getSentAt()) map.putDouble("sent_at", message.getSentAt().getTime());
@@ -59,7 +61,9 @@ public final class TransformMessage {
         message.setState_connectivity_1(map.getBoolean("state_connectivity_1"));
         message.setState_connectivity_2(map.getBoolean("state_connectivity_2"));
         message.setType(ChatMessageType.fromType(map.getString("type")).ordinal());
-        message.setAdditionnal(map.getString("additionnal"));
+        if (map.hasKey("additionnal")) message.setAdditionnal(map.getString("additionnal"));
+        if (map.hasKey("error")) message.setError(map.getBoolean("error"));
+        if (map.hasKey("system")) message.setSystem(map.getBoolean("system"));
         if (null != map.getString("created_at"))
             message.setCreatedAt(fromDouble(map.getDouble("created_at")));
         if (null != map.getString("sent_at"))
