@@ -16,6 +16,10 @@ import android.widget.FrameLayout;
 
 import com.raizlabs.android.dbflow.structure.database.FlowCursor;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import eu.codlab.chat.R;
 import eu.codlab.chat.database.controllers.ChatMessageController;
 import eu.codlab.chat.database.controllers.ModelControllerFactory;
@@ -23,6 +27,7 @@ import eu.codlab.chat.database.models.ChatMessage;
 import eu.codlab.chat.database.models.ChatMessageType;
 import eu.codlab.chat.database.models.User;
 import eu.codlab.chat.ui.recycler.ChatRecyclerViewAdapter;
+import eu.codlab.chat.utils.Requery;
 
 public class ChatView extends FrameLayout {
 
@@ -52,11 +57,35 @@ public class ChatView extends FrameLayout {
         init();
     }
 
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        EventBus.getDefault().unregister(this);
+
+        super.onDetachedFromWindow();
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public ChatView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
 
         init();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(Requery requery) {
+        if(null != adapter) {
+            adapter.requery();
+            if (mKeepScroll) {
+                chat_list.smoothScrollToPosition(adapter.getItemCount());
+            }
+        }
     }
 
     private void init() {
@@ -129,12 +158,5 @@ public class ChatView extends FrameLayout {
                 handler.postDelayed(this, 600);
             }
         });*/
-    }
-
-    private void requery() {
-        adapter.requery();
-        if (mKeepScroll) {
-            chat_list.smoothScrollToPosition(adapter.getItemCount());
-        }
     }
 }

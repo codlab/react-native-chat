@@ -33,4 +33,8 @@ export default class ConversationManager {
         return RNChat.saveMessage(user, conversation, message);
     }
 
+    requery(): Promise<boolean> {
+        return RNChat.requery();
+    }
+
 }
