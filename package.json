@@ -1,6 +1,6 @@
 {
   "name": "react-native-xchat",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "Chat implementation in react native environment",
   "main": "index.js",
   "scripts": {
@@ -13,6 +13,7 @@
   ],
   "author": "Kévin LE PERF",
   "license": "MIT",
+  "homepage": "https://github.com/codlab/react-native-chat",
   "peerDependencies": {
     "react-native": "^0.41.2"
   },
