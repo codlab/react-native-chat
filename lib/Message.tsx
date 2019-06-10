@@ -2,6 +2,9 @@ export interface Message {
     uuid: string;
     content: string;
     additionnal?: string;
+    created_at?: number;
+    sent_at?: number;
+    local?: boolean;
 }
 
 export interface MessageImage extends Message {

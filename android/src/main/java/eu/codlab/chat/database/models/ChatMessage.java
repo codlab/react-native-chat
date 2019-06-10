@@ -43,6 +43,9 @@ public class ChatMessage extends BaseModel {
     @Column
     private boolean system;
 
+    @Column
+    private boolean local;
+
     @Nullable
     @Column
     private boolean state_connectivity_1;
@@ -229,5 +232,13 @@ public class ChatMessage extends BaseModel {
 
     public void setSystem(boolean system) {
         this.system = system;
+    }
+
+    public boolean isLocal() {
+        return local;
+    }
+
+    public void setLocal(boolean local) {
+        this.local = local;
     }
 }
