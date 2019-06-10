@@ -8,6 +8,8 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReadableMap;
 
+import org.greenrobot.eventbus.EventBus;
+
 import eu.codlab.chat.database.controllers.ChatMessageController;
 import eu.codlab.chat.database.controllers.ConversationController;
 import eu.codlab.chat.database.controllers.ModelControllerFactory;
@@ -19,6 +21,7 @@ import eu.codlab.chat.transform.TransformConversations;
 import eu.codlab.chat.transform.TransformMessage;
 import eu.codlab.chat.transform.TransformUser;
 import eu.codlab.chat.utils.FixCursorWindow;
+import eu.codlab.chat.utils.Requery;
 
 public class RNChatModule extends ReactContextBaseJavaModule {
 
@@ -113,6 +116,12 @@ public class RNChatModule extends ReactContextBaseJavaModule {
         } else {
             promise.resolve(false);
         }
+    }
+
+    @ReactMethod
+    public void requery(Promise promise) {
+        EventBus.getDefault().post(new Requery());
+        promise.resolve(true);
     }
 
 
