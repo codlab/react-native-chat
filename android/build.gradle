@@ -15,7 +15,7 @@ def ext = rootProject.ext
 def _compile = ext.has("compileSdkVersion") ? ext.compileSdkVersion : 28
 def _buildTools = ext.has("buildToolsVersion") ? ext.buildToolsVersion : "28.0.3"
 def _supportLib = ext.has("supportLibVersion") ? ext.supportLibVersion : "28.0.0"
-def _minSdk = ext.has("minSdkVersion") ? ext.minSdkVersion : 14
+def _minSdk = ext.has("minSdkVersion") ? ext.minSdkVersion : 16
 def _targetSdk = ext.has("targetSdkVersion") ? ext.targetSdkVersion : 28
 
 android {
