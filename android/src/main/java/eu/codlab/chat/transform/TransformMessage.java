@@ -32,6 +32,7 @@ public final class TransformMessage {
         map.putBoolean("state_connectivity_2", message.isState_connectivity_2());
         map.putBoolean("error", message.isError());
         map.putBoolean("system", message.isSystem());
+        map.putBoolean("local", message.isLocal());
         map.putString("type", message.getMessageType().getType());
         map.putString("additionnal", message.getAdditionnal());
         if (null != message.getSentAt()) map.putDouble("sent_at", message.getSentAt().getTime());
@@ -60,7 +61,12 @@ public final class TransformMessage {
         message.setState_2(map.getString("state_2"));
         message.setState_connectivity_1(map.getBoolean("state_connectivity_1"));
         message.setState_connectivity_2(map.getBoolean("state_connectivity_2"));
-        message.setType(ChatMessageType.fromType(map.getString("type")).ordinal());
+        message.setLocal(map.getBoolean("local"));
+        if(map.hasKey("type")) {
+            message.setType(ChatMessageType.fromType(map.getString("type")).ordinal());
+        } else {
+            message.setType(calculateType(map).ordinal());
+        }
         if (map.hasKey("additionnal")) message.setAdditionnal(map.getString("additionnal"));
         if (map.hasKey("error")) message.setError(map.getBoolean("error"));
         if (map.hasKey("system")) message.setSystem(map.getBoolean("system"));
@@ -72,7 +78,33 @@ public final class TransformMessage {
         return message;
     }
 
+    private static ChatMessageType calculateType(@NonNull ReadableMap map) {
+        if(hasKeys(map,"system", "error")) {
+            return ChatMessageType.CHAT_INTERACTION;
+        } else if(hasKeys(map,"state_1", "state_2", "state_connectivity_1", "state_connectivity_2")) {
+            return ChatMessageType.CHAT_IOT;
+        } else if(hasKeys(map,"image", "local")) {
+            return ChatMessageType.CHAT_IMAGE_TYPE_SENT;
+        } else if(hasKeys(map,"image", "sent_at")) { //not local but has a sent info
+            return ChatMessageType.CHAT_IMAGE_TYPE_RECEIVED;
+        } else if(hasKeys(map,"image", "local")) {
+            return ChatMessageType.CHAT_MESSAGE_TYPE_SENT;
+        } else if(hasKeys(map,"sent_at")) {
+            return ChatMessageType.CHAT_MESSAGE_TYPE_RECEIVED;
+        } else {
+            //default
+            return ChatMessageType.CHAT_MESSAGE_TYPE_SENT;
+        }
+    }
+
     private static Date fromDouble(double value) {
         return new Date((long) value);
+    }
+
+    private static boolean hasKeys(@NonNull ReadableMap map, String ...keys) {
+        for (String key : keys) {
+            if(null == key || !map.hasKey(key)) return false;
+        }
+        return keys.length > 0;
     }
 }
