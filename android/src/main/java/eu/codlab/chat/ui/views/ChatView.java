@@ -38,6 +38,7 @@ public class ChatView extends FrameLayout {
     private Handler handler = new Handler(Looper.getMainLooper());
     private ChatRecyclerViewAdapter adapter;
     private boolean mKeepScroll = true;
+    private String conversationUUID;
 
     public ChatView(@NonNull Context context) {
         super(context);
@@ -89,6 +90,7 @@ public class ChatView extends FrameLayout {
     }
 
     private void init() {
+        conversationUUID = null;
         controller = ModelControllerFactory.get(ChatMessageController.class);
 
         if (null == controller) {
@@ -102,14 +104,11 @@ public class ChatView extends FrameLayout {
 
         chat_list = view.findViewById(R.id.chat_list);
 
-        FlowCursor cursor = controller.fetchFlowCursorForConversation();
         LinearLayoutManager manager = new LinearLayoutManager(view.getContext());
         //manager.setReverseLayout(true);
         manager.setStackFromEnd(true);
 
         chat_list.setLayoutManager(manager);
-        adapter = new ChatRecyclerViewAdapter(cursor);
-        chat_list.setAdapter(adapter);
 
         chat_list.setOverScrollMode(View.OVER_SCROLL_NEVER);
         chat_list.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -118,6 +117,18 @@ public class ChatView extends FrameLayout {
                 mKeepScroll = !recyclerView.canScrollVertically(1);
             }
         });
+    }
+
+    public void setConversation(String conversationUUID) {
+        if(null != this.conversationUUID && this.conversationUUID.equals(conversationUUID)) {
+            onEvent(new Requery());
+        } else {
+            this.conversationUUID = conversationUUID;
+
+            FlowCursor cursor = controller.fetchFlowCursorForConversation();
+            adapter = new ChatRecyclerViewAdapter(cursor);
+            chat_list.setAdapter(adapter);
+        }
 
         /*handler.post(new Runnable() {
             @Override

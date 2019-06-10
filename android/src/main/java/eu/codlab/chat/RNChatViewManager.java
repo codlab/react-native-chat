@@ -1,5 +1,8 @@
 package eu.codlab.chat;
 
+import android.widget.VideoView;
+
+import com.facebook.react.uimanager.ReactProp;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 
@@ -14,5 +17,10 @@ public class RNChatViewManager extends SimpleViewManager<ChatView> {
     @Override
     protected ChatView createViewInstance(ThemedReactContext reactContext) {
         return new ChatView(reactContext);
+    }
+
+    @ReactProp(name="conversationUUID")
+    public void setConversation(ChatView chatView, String conversationUUID) {
+        chatView.setConversation(conversationUUID);
     }
 }

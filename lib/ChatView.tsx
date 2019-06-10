@@ -9,6 +9,7 @@ export interface ChatViewState {
 }
 
 export interface ChatViewProps {
+  conversationUUID: string
 }
 
 export interface Resolve {
