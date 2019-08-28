@@ -17,9 +17,6 @@ import com.raizlabs.android.dbflow.structure.database.FlowCursor;
 import eu.codlab.chat.R;
 import eu.codlab.chat.database.controllers.ChatMessageController;
 import eu.codlab.chat.database.controllers.ModelControllerFactory;
-import eu.codlab.chat.database.models.ChatMessage;
-import eu.codlab.chat.database.models.ChatMessageType;
-import eu.codlab.chat.database.models.User;
 import eu.codlab.chat.ui.recycler.ChatRecyclerViewAdapter;
 
 public class ChatFragment extends Fragment {

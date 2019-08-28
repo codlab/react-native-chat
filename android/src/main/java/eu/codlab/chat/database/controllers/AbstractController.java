@@ -2,7 +2,6 @@ package eu.codlab.chat.database.controllers;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.Select;
@@ -13,14 +12,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import eu.codlab.chat.database.models.User;
-
 public abstract class AbstractController<T extends BaseModel, KEY_TYPE> {
 
     private HashMap<KEY_TYPE, T> mCache;
 
     protected AbstractController() {
         flushCache();
+
+        /*
+        List<T> ts = list();
+        for (T t : ts) {
+            t.delete();
+        }
+        */
     }
 
     public T getItemFrom(KEY_TYPE id) {
@@ -31,14 +35,16 @@ public abstract class AbstractController<T extends BaseModel, KEY_TYPE> {
             if (object != null) putItemInCache(id, object);
         }
 
-        Log.d(getTag(), "getItemFrom: id := " + id + " object := " + object);
         return object;
     }
 
     public void saveItem(KEY_TYPE id, T object) {
-        Log.d(getTag(), "saveItem: id := " + id + " object := " + object);
         putItemInCache(id, object);
-        object.save();
+        try {
+            object.save();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void deleteObject(KEY_TYPE id, T object) {
@@ -86,13 +92,10 @@ public abstract class AbstractController<T extends BaseModel, KEY_TYPE> {
     }
 
     protected T getItemFromDatabase(KEY_TYPE id) {
-        T result = (T) new Select()
+        return (T) new Select()
                 .from(getTableClass())
                 .where(getColumnId().eq(id))
                 .querySingle();
-
-        Log.d(getTag(), "getItemFromDatabase: id := " + result);
-        return result;
     }
 
     public abstract T createObject(@Nullable KEY_TYPE primary);

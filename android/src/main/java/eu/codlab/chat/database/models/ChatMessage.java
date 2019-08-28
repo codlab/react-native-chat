@@ -193,6 +193,29 @@ public class ChatMessage extends BaseModel {
         return state_connectivity_1;
     }
 
+    @Override
+    public String toString() {
+        return "ChatMessage{" +
+                "id=" + id +
+                ", type=" + type +
+                ", content='" + content + '\'' +
+                ", additionnal='" + additionnal + '\'' +
+                ", state_1='" + state_1 + '\'' +
+                ", state_2='" + state_2 + '\'' +
+                ", error=" + error +
+                ", system=" + system +
+                ", local=" + local +
+                ", state_connectivity_1=" + state_connectivity_1 +
+                ", state_connectivity_2=" + state_connectivity_2 +
+                ", image='" + image + '\'' +
+                ", createdAt=" + createdAt +
+                ", sentAt=" + sentAt +
+                ", conversationId=" + conversationId +
+                ", uuid='" + uuid + '\'' +
+                ", sender='" + sender + '\'' +
+                '}';
+    }
+
     public void setState_connectivity_1(boolean state_connectivity_1) {
         this.state_connectivity_1 = state_connectivity_1;
     }

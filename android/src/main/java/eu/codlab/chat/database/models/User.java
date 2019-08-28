@@ -91,4 +91,14 @@ public class User extends BaseModel {
         }
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uuid='" + uuid + '\'' +
+                ", name='" + name + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", additionnal='" + additionnal + '\'' +
+                '}';
+    }
 }

@@ -13,7 +13,6 @@ import java.util.Date;
 
 import eu.codlab.chat.database.models.ChatMessage;
 import eu.codlab.chat.database.models.ChatMessageType;
-import eu.codlab.chat.database.models.User;
 
 public final class TransformMessage {
     private TransformMessage() {
@@ -54,42 +53,45 @@ public final class TransformMessage {
     @NonNull
     public static ChatMessage fromMap(@NonNull ReadableMap map) {
         ChatMessage message = new ChatMessage();
-        message.setUuid(map.getString("uuid"));
-        message.setContent(map.getString("content"));
-        message.setImage(map.getString("image"));
-        message.setState_1(map.getString("state_1"));
-        message.setState_2(map.getString("state_2"));
-        message.setState_connectivity_1(map.getBoolean("state_connectivity_1"));
-        message.setState_connectivity_2(map.getBoolean("state_connectivity_2"));
-        message.setLocal(map.getBoolean("local"));
-        if(map.hasKey("type")) {
+        if (map.hasKey("uuid")) message.setUuid(map.getString("uuid"));
+        if (map.hasKey("content")) message.setContent(map.getString("content"));
+        if (map.hasKey("image")) message.setImage(map.getString("image"));
+        if (map.hasKey("state_1")) message.setState_1(map.getString("state_1"));
+        if (map.hasKey("state_2")) message.setState_2(map.getString("state_2"));
+        if (map.hasKey("state_connectivity_1"))
+            message.setState_connectivity_1(map.getBoolean("state_connectivity_1"));
+        if (map.hasKey("state_connectivity_2"))
+            message.setState_connectivity_2(map.getBoolean("state_connectivity_2"));
+        if (map.hasKey("local")) message.setLocal(map.getBoolean("local"));
+        /*if (map.hasKey("type")) {
             message.setType(ChatMessageType.fromType(map.getString("type")).ordinal());
         } else {
             message.setType(calculateType(map).ordinal());
-        }
+        }*/
+        message.setType(calculateType(map).ordinal());
         if (map.hasKey("additionnal")) message.setAdditionnal(map.getString("additionnal"));
         if (map.hasKey("error")) message.setError(map.getBoolean("error"));
         if (map.hasKey("system")) message.setSystem(map.getBoolean("system"));
-        if (null != map.getString("created_at"))
+        if (map.hasKey("created_at") && null != map.getString("created_at"))
             message.setCreatedAt(fromDouble(map.getDouble("created_at")));
-        if (null != map.getString("sent_at"))
+        if (map.hasKey("sent_at") && null != map.getString("sent_at"))
             message.setSentAt(fromDouble(map.getDouble("sent_at")));
 
         return message;
     }
 
     private static ChatMessageType calculateType(@NonNull ReadableMap map) {
-        if(hasKeys(map,"system", "error")) {
+        if (hasKeys(map, "system", "error")) {
             return ChatMessageType.CHAT_INTERACTION;
-        } else if(hasKeys(map,"state_1", "state_2", "state_connectivity_1", "state_connectivity_2")) {
+        } else if (hasKeys(map, "state_1", "state_2", "state_connectivity_1", "state_connectivity_2")) {
             return ChatMessageType.CHAT_IOT;
-        } else if(hasKeys(map,"image", "local")) {
+        } else if (hasKeys(map, "image", "local") && map.getBoolean("local")) {
             return ChatMessageType.CHAT_IMAGE_TYPE_SENT;
-        } else if(hasKeys(map,"image", "sent_at")) { //not local but has a sent info
+        } else if (hasKeys(map, "image", "sent_at") || (hasKeys(map, "image", "local") && !map.getBoolean("local"))) { //not local but has a sent info
             return ChatMessageType.CHAT_IMAGE_TYPE_RECEIVED;
-        } else if(hasKeys(map,"image", "local")) {
+        } else if (hasKeys(map, "image", "local")) {
             return ChatMessageType.CHAT_MESSAGE_TYPE_SENT;
-        } else if(hasKeys(map,"sent_at")) {
+        } else if (hasKeys(map, "sent_at")) {
             return ChatMessageType.CHAT_MESSAGE_TYPE_RECEIVED;
         } else {
             //default
@@ -101,9 +103,9 @@ public final class TransformMessage {
         return new Date((long) value);
     }
 
-    private static boolean hasKeys(@NonNull ReadableMap map, String ...keys) {
+    private static boolean hasKeys(@NonNull ReadableMap map, String... keys) {
         for (String key : keys) {
-            if(null == key || !map.hasKey(key)) return false;
+            if (null == key || !map.hasKey(key)) return false;
         }
         return keys.length > 0;
     }

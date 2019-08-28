@@ -2,7 +2,6 @@ package eu.codlab.chat.ui.recycler;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.ViewGroup;
 
 import com.raizlabs.android.dbflow.structure.database.FlowCursor;
@@ -26,8 +25,6 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<AbstractMessag
         setHasStableIds(true);
 
         this.controller = ModelControllerFactory.get(ChatMessageController.class);
-
-        Log.d(TAG, "ChatRecyclerViewAdapter: cursor length := " + cursor.getCount());
     }
 
     public void setCursor(@NonNull FlowCursor cursor) {
@@ -71,7 +68,6 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<AbstractMessag
     public void requery() {
         int count = getItemCount();
         getCursor().requery();
-        Log.d(TAG, "requery: count:=" + count + " // new_count:=" + getCursor().getCount());
 
         notifyDataSetChanged();
     }

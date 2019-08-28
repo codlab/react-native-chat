@@ -31,7 +31,9 @@ public final class TransformUser {
     public static WritableArray toMap(@Nullable Iterable<User> users) {
         WritableNativeArray array = new WritableNativeArray();
         if (null != users) {
-            for (User user : users) array.pushMap(toMap(user));
+            for (User user : users) {
+                if(null != user) array.pushMap(toMap(user));
+            }
         }
         return array;
     }
@@ -39,10 +41,10 @@ public final class TransformUser {
     @NonNull
     public static User fromMap(@NonNull ReadableMap map) {
         User user = new User();
-        user.setUuid(map.getString("uuid"));
-        user.setName(map.getString("name"));
-        user.setAvatar(map.getString("avatar"));
-        user.setAdditionnal(map.getString("additionnal"));
+        if (map.hasKey("uuid")) user.setUuid(map.getString("uuid"));
+        if (map.hasKey("name")) user.setName(map.getString("name"));
+        if (map.hasKey("avatar")) user.setAvatar(map.getString("avatar"));
+        if (map.hasKey("additionnal")) user.setAdditionnal(map.getString("additionnal"));
 
         return user;
     }

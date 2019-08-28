@@ -11,9 +11,10 @@ import java.util.List;
 
 import eu.codlab.chat.database.models.Conversation;
 import eu.codlab.chat.database.models.Conversation_Table;
-import eu.codlab.chat.database.models.User;
 
 public class ConversationController extends AbstractController<Conversation, Long> {
+    private static final String TAG = ConversationController.class.getSimpleName();
+
     @Override
     protected Property<Long> getColumnId() {
         return Conversation_Table.id;
@@ -54,6 +55,7 @@ public class ConversationController extends AbstractController<Conversation, Lon
         }
         conversation.save();
         saveItem(conversation.getId(), conversation);
+        conversation.setUsers(conversation.getUsers());
         return conversation;
     }
 

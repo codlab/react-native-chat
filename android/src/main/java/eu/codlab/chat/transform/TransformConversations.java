@@ -10,7 +10,6 @@ import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
 
 import eu.codlab.chat.database.models.Conversation;
-import eu.codlab.chat.database.models.User;
 
 public final class TransformConversations {
     private TransformConversations() {
@@ -40,8 +39,8 @@ public final class TransformConversations {
     @NonNull
     public static Conversation fromMap(@NonNull ReadableMap map) {
         Conversation conversation = new Conversation();
-        conversation.setUuid(map.getString("uuid"));
-        conversation.setName(map.getString("name"));
+        if (map.hasKey("uuid")) conversation.setUuid(map.getString("uuid"));
+        if (map.hasKey("name")) conversation.setName(map.getString("name"));
 
         return conversation;
     }

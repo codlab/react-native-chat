@@ -3,10 +3,7 @@ package eu.codlab.chat.database.controllers;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.raizlabs.android.dbflow.sql.Query;
-import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.From;
-import com.raizlabs.android.dbflow.sql.language.SQLOperator;
 import com.raizlabs.android.dbflow.sql.language.Select;
 import com.raizlabs.android.dbflow.sql.language.Where;
 import com.raizlabs.android.dbflow.sql.language.property.Property;
@@ -80,6 +77,7 @@ public class ConversationUserController extends AbstractController<ConversationU
             conversationUser.setUserId(user.getUuid());
 
             conversationUser.save();
+            putItemInCache(conversationUser.getId(), conversationUser);
         }
     }
 

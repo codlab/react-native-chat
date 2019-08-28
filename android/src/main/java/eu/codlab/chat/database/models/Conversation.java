@@ -26,7 +26,7 @@ public class Conversation extends BaseModel {
     @Column
     private String name;
 
-    private List<User> users = new ArrayList<>();
+    private List<User> users = null;
 
     public Conversation() {
         uuid = "";
@@ -64,7 +64,8 @@ public class Conversation extends BaseModel {
                 .getUsersForConversation(this);
 
         for (ConversationUser user : users) {
-            result.add(user.getUser());
+            User tmp = user.getUser();
+            result.add(tmp);
         }
 
         if(null == this.users) this.users = result;
@@ -76,8 +77,10 @@ public class Conversation extends BaseModel {
         List<User> still_in = new ArrayList<>();
         List<User> to_remove = new ArrayList<>();
 
-        for (User user : this.users) {
-            if(!users.contains(user)) to_remove.add(user);
+        if(null != users) {
+            for (User user : this.users) {
+                if (!users.contains(user)) to_remove.add(user);
+            }
         }
 
         for (User user : to_remove) {
@@ -89,7 +92,7 @@ public class Conversation extends BaseModel {
     }
 
     public boolean hasUser(@NonNull User user) {
-        return users.contains(user);
+        return getUsers().contains(user);
     }
 
     public boolean addUser(@NonNull User user) {
@@ -101,5 +104,15 @@ public class Conversation extends BaseModel {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Conversation{" +
+                "id=" + id +
+                ", uuid='" + uuid + '\'' +
+                ", name='" + name + '\'' +
+                ", users=" + users +
+                '}';
     }
 }

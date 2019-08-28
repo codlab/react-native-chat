@@ -5,7 +5,6 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReadableMap;
 
 import org.greenrobot.eventbus.EventBus;
@@ -25,6 +24,7 @@ import eu.codlab.chat.utils.Requery;
 
 public class RNChatModule extends ReactContextBaseJavaModule {
 
+    private static final String TAG = "ChatModule";
     private final ReactApplicationContext reactContext;
 
     private ChatMessageController chatMessageController;

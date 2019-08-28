@@ -23,9 +23,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import eu.codlab.chat.R;
 import eu.codlab.chat.database.controllers.ChatMessageController;
 import eu.codlab.chat.database.controllers.ModelControllerFactory;
-import eu.codlab.chat.database.models.ChatMessage;
-import eu.codlab.chat.database.models.ChatMessageType;
-import eu.codlab.chat.database.models.User;
 import eu.codlab.chat.ui.recycler.ChatRecyclerViewAdapter;
 import eu.codlab.chat.utils.Requery;
 

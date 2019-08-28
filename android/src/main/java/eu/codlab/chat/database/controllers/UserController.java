@@ -6,12 +6,12 @@ import android.support.annotation.Nullable;
 import com.raizlabs.android.dbflow.sql.language.property.Property;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
-import java.util.List;
-
 import eu.codlab.chat.database.models.User;
 import eu.codlab.chat.database.models.User_Table;
 
 public class UserController extends AbstractController<User, String> {
+    private static final String TAG = UserController.class.getSimpleName();
+
     @Override
     protected Property<String> getColumnId() {
         return User_Table.uuid;
@@ -44,8 +44,7 @@ public class UserController extends AbstractController<User, String> {
         String uuid = user.getUuid();
         User cache = getItemFrom(uuid);
 
-        if(null == cache) {
-            user.save();
+        if (null == cache) {
             saveItem(user.getUuid(), user);
             return user;
         }
