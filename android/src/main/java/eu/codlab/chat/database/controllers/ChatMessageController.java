@@ -42,9 +42,10 @@ public class ChatMessageController extends AbstractController<ChatMessage, Long>
     }
 
     @NonNull
-    public FlowCursor fetchFlowCursorForConversation() {
+    public FlowCursor fetchFlowCursorForConversation(@NonNull String uuid) {
         return new Select()
                 .from(getTableClass())
+                .where(ChatMessage_Table.uuid.eq(uuid))
                 .orderBy(ChatMessage_Table.id.asc())
                 .query();
     }

@@ -122,7 +122,7 @@ public class ChatView extends FrameLayout {
         } else {
             this.conversationUUID = conversationUUID;
 
-            FlowCursor cursor = controller.fetchFlowCursorForConversation();
+            FlowCursor cursor = controller.fetchFlowCursorForConversation(conversationUUID);
             adapter = new ChatRecyclerViewAdapter(cursor);
             chat_list.setAdapter(adapter);
         }
