@@ -2,6 +2,7 @@ package eu.codlab.chat.database.controllers;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.raizlabs.android.dbflow.sql.language.Select;
 import com.raizlabs.android.dbflow.sql.language.property.Property;
@@ -12,6 +13,7 @@ import java.util.Date;
 
 import eu.codlab.chat.database.models.ChatMessage;
 import eu.codlab.chat.database.models.ChatMessage_Table;
+import eu.codlab.chat.database.models.Conversation;
 
 public class ChatMessageController extends AbstractController<ChatMessage, Long> {
     @Override
@@ -42,10 +44,17 @@ public class ChatMessageController extends AbstractController<ChatMessage, Long>
     }
 
     @NonNull
-    public FlowCursor fetchFlowCursorForConversation(@NonNull String uuid) {
+    public FlowCursor fetchFlowCursorForConversation(@NonNull Conversation conversation) {
+        Log.d("ChatView", "fetchFlowCursorForConversation: fetching for conversation " + conversation);
+        return fetchFlowCursorForConversation(conversation.getId());
+    }
+
+    @NonNull
+    public FlowCursor fetchFlowCursorForConversation(@NonNull long id) {
+        Log.d("ChatView", "fetchFlowCursorForConversation: " + id);
         return new Select()
                 .from(getTableClass())
-                .where(ChatMessage_Table.uuid.eq(uuid))
+                .where(ChatMessage_Table.conversationId.eq(id))
                 .orderBy(ChatMessage_Table.id.asc())
                 .query();
     }

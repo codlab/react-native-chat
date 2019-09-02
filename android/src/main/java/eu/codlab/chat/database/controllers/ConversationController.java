@@ -2,6 +2,7 @@ package eu.codlab.chat.database.controllers;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.raizlabs.android.dbflow.sql.language.Select;
 import com.raizlabs.android.dbflow.sql.language.property.Property;
@@ -53,8 +54,13 @@ public class ConversationController extends AbstractController<Conversation, Lon
                 return conv;
             }
         }
-        conversation.save();
-        saveItem(conversation.getId(), conversation);
+        try {
+            conversation.save();
+            saveItem(conversation.getId(), conversation);
+        } catch (Exception e) {
+            Log.d("ChatView", "getOrCreate: exception " + e.getMessage());
+            e.printStackTrace();
+        }
         conversation.setUsers(conversation.getUsers());
         return conversation;
     }

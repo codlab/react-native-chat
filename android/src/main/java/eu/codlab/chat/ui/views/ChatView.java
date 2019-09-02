@@ -22,7 +22,9 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import eu.codlab.chat.R;
 import eu.codlab.chat.database.controllers.ChatMessageController;
+import eu.codlab.chat.database.controllers.ConversationController;
 import eu.codlab.chat.database.controllers.ModelControllerFactory;
+import eu.codlab.chat.database.models.Conversation;
 import eu.codlab.chat.ui.recycler.ChatRecyclerViewAdapter;
 import eu.codlab.chat.utils.Requery;
 
@@ -122,7 +124,14 @@ public class ChatView extends FrameLayout {
         } else {
             this.conversationUUID = conversationUUID;
 
-            FlowCursor cursor = controller.fetchFlowCursorForConversation(conversationUUID);
+            ConversationController conversationController = ModelControllerFactory.get(ConversationController.class);
+            Conversation conversation = new Conversation();
+            conversation.setUuid(conversationUUID);
+
+            //get or create the conversation from its pointer
+            conversation = conversationController.getOrCreate(conversation);
+            FlowCursor cursor = controller.fetchFlowCursorForConversation(conversation);
+
             adapter = new ChatRecyclerViewAdapter(cursor);
             chat_list.setAdapter(adapter);
         }

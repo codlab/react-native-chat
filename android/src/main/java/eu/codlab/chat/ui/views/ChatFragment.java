@@ -51,7 +51,7 @@ public class ChatFragment extends Fragment {
 
         chat_list = view.findViewById(R.id.chat_list);
 
-        FlowCursor cursor = controller.fetchFlowCursorForConversation();
+        FlowCursor cursor = controller.fetchFlowCursorForConversation(0);
         LinearLayoutManager manager = new LinearLayoutManager(view.getContext());
         //manager.setReverseLayout(true);
         manager.setStackFromEnd(true);
