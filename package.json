@@ -1,12 +1,12 @@
 {
   "name": "react-native-xchat",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "description": "Chat implementation in react native environment",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lib-build": "./build.sh",
-    "lib-publish": "npm run lib-build && cd build/dist && npm publish"
+    "build": "tsc",
+    "publish": "npm run build && npm publish"
   },
   "keywords": [
     "react-native"
@@ -15,7 +15,7 @@
   "license": "MIT",
   "homepage": "https://github.com/codlab/react-native-chat",
   "peerDependencies": {
-    "react-native": "^0.41.2"
+    "react-native": "^0.55.4"
   },
   "devDependencies": {
     "@types/react": "^16.8.13",
@@ -23,5 +23,16 @@
     "react-native-scripts-ts": "^1.15.0",
     "tslib": "^1.9.3",
     "typescript": "^3.4.3"
-  }
+  },
+  "files": [
+    "package.json",
+    "lib/",
+    "dist/",
+    "android/src",
+    "android/build.gradle",
+    "RNChat.podspec",
+    "ios/",
+    "README.md",
+    "LICENSE"
+  ]
 }

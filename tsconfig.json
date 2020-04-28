@@ -4,7 +4,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "target": "es5",
     "module": "es2015",
-    "outDir": "build/dist",
+    "outDir": "dist",
     "sourceMap": true,
     "experimentalDecorators": true,
     "jsx": "react-native",
@@ -18,7 +18,6 @@
     "skipLibCheck": true
   },
   "exclude": [
-    "build",
     "dist",
     "node_modules"
   ]

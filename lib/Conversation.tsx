@@ -1,4 +1,4 @@
-import { User } from "..";
+import { User } from ".";
 
 export default interface Conversation {
     id: number;

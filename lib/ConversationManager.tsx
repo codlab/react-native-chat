@@ -1,5 +1,5 @@
 import { NativeModules } from 'react-native';
-import { User } from '..';
+import { User } from '.';
 import Conversation from './Conversation';
 import { Message } from './Message';
 const { RNChat } = NativeModules;
