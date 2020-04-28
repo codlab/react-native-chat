@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = 'RNChat'
-    s.version      = '1.0.25'
+    s.version      = '1.0.27'
     s.summary      = 'RNChat'
     s.description  = <<-DESC
                     Reactive Chat Library
