@@ -72,9 +72,9 @@ public final class TransformMessage {
         if (map.hasKey("additionnal")) message.setAdditionnal(map.getString("additionnal"));
         if (map.hasKey("error")) message.setError(map.getBoolean("error"));
         if (map.hasKey("system")) message.setSystem(map.getBoolean("system"));
-        if (map.hasKey("created_at") && null != map.getDouble("created_at"))
+        if (map.hasKey("created_at") && isNull(map,"created_at"))
             message.setCreatedAt(fromDouble(map.getDouble("created_at")));
-        if (map.hasKey("sent_at") && null != map.getDouble("sent_at"))
+        if (map.hasKey("sent_at") && isNull(map,"sent_at"))
             message.setSentAt(fromDouble(map.getDouble("sent_at")));
 
         return message;
@@ -108,5 +108,14 @@ public final class TransformMessage {
             if (null == key || !map.hasKey(key)) return false;
         }
         return keys.length > 0;
+    }
+
+    private static boolean isNull(@NonNull ReadableMap map, @NonNull String key) {
+        try {
+            return map.isNull(key);
+        }catch (Exception e){
+
+        }
+        return false;
     }
 }
