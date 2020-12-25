@@ -149,8 +149,8 @@ public class ChatMessage extends BaseModel {
         setSender(user.getUuid());
     }
 
-    public void setSender(String uuid) {
-        this.uuid = uuid;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
     @Nullable
     public String getSender() {
