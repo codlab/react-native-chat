@@ -16,7 +16,7 @@ public class DatabaseChat {
 
     public final static String NAME = "DatabaseChat";
 
-    public final static int VERSION = 3;
+    public final static int VERSION = 4;
 
     @Migration(version = 3, database = DatabaseChat.class)
     public static class Migration2 extends AlterTableMigration<ChatMessage> {
@@ -28,6 +28,19 @@ public class DatabaseChat {
         @Override
         public void onPreMigrate() {
             addColumn(SQLiteType.INTEGER, "local");
+        }
+    }
+
+    @Migration(version = 4, database = DatabaseChat.class)
+    public static class Migration3 extends AlterTableMigration<ChatMessage> {
+
+        public Migration3(Class<ChatMessage> table) {
+            super(table);
+        }
+
+        @Override
+        public void onPreMigrate() {
+            addColumn(SQLiteType.INTEGER, "yyyymmdd");
         }
     }
 

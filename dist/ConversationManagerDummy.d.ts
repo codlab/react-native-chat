@@ -10,5 +10,6 @@ export default class ConversationManagerDummy {
     createConversation(uuid: string, name: string): Promise<Conversation>;
     addUserToConversation(user: User, conversation: Conversation): Promise<boolean>;
     saveMessage(user: User, conversation: Conversation, message: Message): Promise<never>;
+    setSent(uuid: string): Promise<never>;
     requery(): Promise<boolean>;
 }

@@ -37,7 +37,12 @@ export default class ConversationManager {
         return RNChat.addUserToConversation(user, conversation);
     }
 
-    saveMessage(user: User, conversation: Conversation, message: Message) {
+    setSent(uuid: string): Promise<boolean> {
+        if(need_dummy) return ConversationManagerDummy.instance.setSent(uuid);
+        return RNChat.setSent(uuid);
+    }
+
+    saveMessage(user: User, conversation: Conversation, message: Message): Promise<boolean> {
         if(need_dummy) return ConversationManagerDummy.instance.saveMessage(user, conversation, message);
         return RNChat.saveMessage(user, conversation, message);
     }

@@ -8,6 +8,7 @@ export default class ConversationManager {
     getConversations(): Promise<Conversation[]>;
     createConversation(uuid: string, name: string): Promise<Conversation>;
     addUserToConversation(user: User, conversation: Conversation): Promise<boolean>;
-    saveMessage(user: User, conversation: Conversation, message: Message): any;
+    setSent(uuid: string): Promise<boolean>;
+    saveMessage(user: User, conversation: Conversation, message: Message): Promise<boolean>;
     requery(): Promise<boolean>;
 }

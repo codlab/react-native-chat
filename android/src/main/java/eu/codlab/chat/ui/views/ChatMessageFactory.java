@@ -8,6 +8,7 @@ import eu.codlab.chat.database.models.ChatMessageType;
 import eu.codlab.chat.ui.items.AbstractMessageHolder;
 import eu.codlab.chat.ui.items.ChatImageHolder;
 import eu.codlab.chat.ui.items.ChatMessageCallInfoHolder;
+import eu.codlab.chat.ui.items.ChatMessageDateHolder;
 import eu.codlab.chat.ui.items.ChatMessageHolder;
 import eu.codlab.chat.ui.items.ChatMessageInteractionHolder;
 import eu.codlab.chat.ui.items.ChatMessageIoTHolder;
@@ -20,6 +21,8 @@ public class ChatMessageFactory {
 
     public static int getResourceId(ChatMessageType type) {
         switch (type) {
+            case CHAT_DATE:
+                return R.layout.fragment_chat_message_date;
             case CHAT_IOT:
                 return R.layout.fragment_chat_message_iot;
             case CHAT_INTERACTION:
@@ -48,6 +51,8 @@ public class ChatMessageFactory {
         int resource = getResourceId(type);
 
         switch (type) {
+            case CHAT_DATE:
+                return new ChatMessageDateHolder(resource, parent);
             case CHAT_IOT:
                 return new ChatMessageIoTHolder(resource, parent);
             case CHAT_INTERACTION:

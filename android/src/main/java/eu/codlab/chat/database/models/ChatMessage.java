@@ -3,6 +3,7 @@ package eu.codlab.chat.database.models;
 import android.support.annotation.Nullable;
 
 import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.Index;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
@@ -59,9 +60,14 @@ public class ChatMessage extends BaseModel {
     private String image;
 
     @Column
+    private int yyyymmdd;
+
+    @Column
+    @Index
     private Date createdAt;
 
     @Column
+    @Index
     private Date sentAt;
 
     @Column
@@ -121,6 +127,14 @@ public class ChatMessage extends BaseModel {
         return content;
     }
 
+    public int getYyyymmdd() {
+        return yyyymmdd;
+    }
+
+    public void setYyyymmdd(int yyyymmdd) {
+        this.yyyymmdd = yyyymmdd;
+    }
+
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -152,6 +166,7 @@ public class ChatMessage extends BaseModel {
     public void setSender(String sender) {
         this.sender = sender;
     }
+
     @Nullable
     public String getSender() {
         return sender;

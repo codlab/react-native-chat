@@ -1,13 +1,20 @@
 
 package eu.codlab.chat;
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.Date;
 
 import eu.codlab.chat.database.controllers.ChatMessageController;
 import eu.codlab.chat.database.controllers.ConversationController;
@@ -33,6 +40,13 @@ public class RNChatModule extends ReactContextBaseJavaModule {
 
     public RNChatModule(ReactApplicationContext reactContext) {
         super(reactContext);
+
+        try {
+            JodaTimeAndroid.init(reactContext.getApplicationContext());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         this.reactContext = reactContext;
 
 
@@ -95,15 +109,41 @@ public class RNChatModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void setSent(@NonNull String uuid, Promise promise) {
+        ChatMessage chatMessage = chatMessageController.message(uuid);
+        if (null != chatMessage) {
+            chatMessage.setSentAt(new Date());
+            chatMessage.save();
+            promise.resolve(true);
+        } else {
+            promise.resolve(false);
+        }
+    }
+
+    @ReactMethod
     public void saveMessage(ReadableMap userJS, ReadableMap conversationJS, ReadableMap messageJS, Promise promise) {
         if (null != userJS && null != conversationJS && null != messageJS) {
             User user = userController.getOrCreate(TransformUser.fromMap(userJS));
             Conversation conversation = conversationController.getOrCreate(TransformConversations.fromMap(conversationJS));
             ChatMessage message = TransformMessage.fromMap(messageJS);
 
+            if (chatMessageController.exists(message.getUuid())) {
+                Log.d(TAG, "saveMessage: the message already exists, skipping");
+                promise.resolve(false);
+                return;
+            }
+
             if (!conversation.hasUser(user)) {
                 conversation.addUser(user);
                 conversation.save();
+            }
+
+            Date date = message.getCreatedAt();
+            if (null == date) date = message.getSentAt();
+
+            Log.d(TAG, "saveMessage: saving message with createdAt " + date);
+            if (null != date) {
+                chatMessageController.checkForDateHeader(conversation, date);
             }
 
             message.setConversationId(conversation.getId());

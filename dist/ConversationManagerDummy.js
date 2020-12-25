@@ -21,6 +21,9 @@ var ConversationManagerDummy = /** @class */ (function () {
     ConversationManagerDummy.prototype.saveMessage = function (user, conversation, message) {
         return Promise.reject("can send message");
     };
+    ConversationManagerDummy.prototype.setSent = function (uuid) {
+        return Promise.reject("can't set ent");
+    };
     ConversationManagerDummy.prototype.requery = function () {
         return Promise.resolve(false);
     };

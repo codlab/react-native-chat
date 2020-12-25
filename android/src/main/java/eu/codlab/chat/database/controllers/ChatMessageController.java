@@ -9,11 +9,17 @@ import com.raizlabs.android.dbflow.sql.language.property.Property;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 import com.raizlabs.android.dbflow.structure.database.FlowCursor;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+
 import java.util.Date;
+import java.util.List;
 
 import eu.codlab.chat.database.models.ChatMessage;
+import eu.codlab.chat.database.models.ChatMessageType;
 import eu.codlab.chat.database.models.ChatMessage_Table;
 import eu.codlab.chat.database.models.Conversation;
+import eu.codlab.chat.utils.DateUtils;
 
 public class ChatMessageController extends AbstractController<ChatMessage, Long> {
     @Override
@@ -55,8 +61,64 @@ public class ChatMessageController extends AbstractController<ChatMessage, Long>
         return new Select()
                 .from(getTableClass())
                 .where(ChatMessage_Table.conversationId.eq(id))
-                .orderBy(ChatMessage_Table.id.asc())
+                .orderBy(ChatMessage_Table.createdAt.asc())
                 .query();
+    }
+
+    public void checkForDateHeader(@NonNull Conversation conversation, @NonNull long millis) {
+        DateTime dateTime = new DateTime(millis, DateTimeZone.UTC);
+        Date date = dateTime.toDate();
+        checkForDateHeader(conversation, date);
+    }
+
+    public void checkForDateHeader(@NonNull Conversation conversation, @NonNull Date date) {
+        int yyyymmdd = DateUtils.getYYYYMMDD(date);
+        List messages = new Select()
+                .from(getTableClass())
+                .where(ChatMessage_Table.conversationId.eq(conversation.getId()))
+                .and(ChatMessage_Table.yyyymmdd.eq(yyyymmdd))
+                .limit(1)
+                .queryList();
+
+        Log.d("ChatMessageController", "checkForDateHeader: creating a message " + yyyymmdd);
+
+        if (messages.size() == 0) {
+            ChatMessage header = new ChatMessage();
+            header.setType(ChatMessageType.CHAT_DATE.ordinal());
+            DateTime dateTime = new DateTime(date);
+            try {
+                dateTime = dateTime.withSecondOfMinute(0).withMinuteOfHour(0).withHourOfDay(0);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            header.setCreatedAt(dateTime.toDate());
+            header.setYyyymmdd(yyyymmdd);
+            header.setConversationId(conversation.getId());
+            header.save();
+            saveItem(header.getId(), header);
+        } else {
+            Log.d("ChatMessageController", "checkForDateHeader: no need to create a message");
+        }
+    }
+
+    public boolean exists(@NonNull String uuid) {
+        return null != message(uuid);
+    }
+
+    @Nullable
+    public ChatMessage message(@NonNull String uuid) {
+        List<ChatMessage> messages = (List<ChatMessage>) new Select()
+                .from(getTableClass())
+                .where(ChatMessage_Table.uuid.eq(uuid))
+                .queryList();
+
+        ChatMessage chatMessage = messages.size() > 0 ? messages.get(0) : null;
+        if (null == chatMessage) return null;
+
+        ChatMessage cache = getItemFromCache(chatMessage.getId());
+        if (null == cache) putItemInCache(chatMessage.getId(), chatMessage);
+
+        return chatMessage;
     }
 
     @NonNull

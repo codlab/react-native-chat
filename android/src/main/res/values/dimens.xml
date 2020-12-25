@@ -7,4 +7,5 @@
     <dimen name="chat_message_avatar_size">32dp</dimen>
     <dimen name="chat_message_avatar_radius">16dp</dimen>
     <dimen name="chat_margin_horizontal">20dp</dimen>
+    <dimen name="chat_message_date_size">6dp</dimen>
 </resources>

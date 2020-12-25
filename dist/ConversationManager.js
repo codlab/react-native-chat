@@ -30,6 +30,11 @@ var ConversationManager = /** @class */ (function () {
             return ConversationManagerDummy.instance.addUserToConversation(user, conversation);
         return RNChat.addUserToConversation(user, conversation);
     };
+    ConversationManager.prototype.setSent = function (uuid) {
+        if (need_dummy)
+            return ConversationManagerDummy.instance.setSent(uuid);
+        return RNChat.setSent(uuid);
+    };
     ConversationManager.prototype.saveMessage = function (user, conversation, message) {
         if (need_dummy)
             return ConversationManagerDummy.instance.saveMessage(user, conversation, message);

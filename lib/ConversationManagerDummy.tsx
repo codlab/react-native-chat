@@ -35,6 +35,10 @@ export default class ConversationManagerDummy {
         return Promise.reject("can send message");
     }
 
+    setSent(uuid: string) {
+        return Promise.reject("can't set ent");
+    }
+
     requery(): Promise<boolean> {
         return Promise.resolve(false);
     }
