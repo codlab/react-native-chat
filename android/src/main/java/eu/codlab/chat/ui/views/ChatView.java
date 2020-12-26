@@ -4,15 +4,16 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.raizlabs.android.dbflow.structure.database.FlowCursor;
 
@@ -80,7 +81,7 @@ public class ChatView extends FrameLayout {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(Requery requery) {
-        if(null != adapter) {
+        if (null != adapter) {
             adapter.requery();
             if (mKeepScroll) {
                 chat_list.smoothScrollToPosition(adapter.getItemCount());
@@ -119,7 +120,7 @@ public class ChatView extends FrameLayout {
     }
 
     public void setConversation(String conversationUUID) {
-        if(null != this.conversationUUID && this.conversationUUID.equals(conversationUUID)) {
+        if (null != this.conversationUUID && this.conversationUUID.equals(conversationUUID)) {
             onEvent(new Requery());
         } else {
             this.conversationUUID = conversationUUID;

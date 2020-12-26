@@ -1,6 +1,6 @@
 package eu.codlab.chat.database.models;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
@@ -68,7 +68,7 @@ public class Conversation extends BaseModel {
             result.add(tmp);
         }
 
-        if(null == this.users) this.users = result;
+        if (null == this.users) this.users = result;
 
         return result;
     }
@@ -77,7 +77,7 @@ public class Conversation extends BaseModel {
         List<User> still_in = new ArrayList<>();
         List<User> to_remove = new ArrayList<>();
 
-        if(null != users) {
+        if (null != users) {
             for (User user : this.users) {
                 if (!users.contains(user)) to_remove.add(user);
             }
@@ -96,7 +96,7 @@ public class Conversation extends BaseModel {
     }
 
     public boolean addUser(@NonNull User user) {
-        if(!hasUser(user)) {
+        if (!hasUser(user)) {
             ModelControllerFactory.get(ConversationUserController.class)
                     .createLink(this, user);
             users.add(user);

@@ -1,8 +1,9 @@
 package eu.codlab.chat.ui.items;
 
-import android.support.annotation.LayoutRes;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.annotation.LayoutRes;
 
 import com.squareup.picasso.Picasso;
 
@@ -28,14 +29,14 @@ public class ChatImageHolder extends AbstractMessageHolder {
         String image = message.getImage();
         String content = message.getContent();
 
-        if(null != image && image.length() > 0) {
+        if (null != image && image.length() > 0) {
             Picasso.with(itemView.getContext())
                     .load(FileUtil.reactNativePath(image))
                     .resize(720, 600)
                     .onlyScaleDown()
                     .centerCrop()
                     .into(photo);
-        } else if(null != content && content.length() > 0) {
+        } else if (null != content && content.length() > 0) {
             Picasso.with(itemView.getContext())
                     .load(FileUtil.reactNativePath(image))
                     .resize(720, 600)

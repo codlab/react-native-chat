@@ -1,9 +1,10 @@
 package eu.codlab.chat.ui.items;
 
-import android.support.annotation.LayoutRes;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
+import androidx.annotation.LayoutRes;
+import androidx.recyclerview.widget.RecyclerView;
 
 import eu.codlab.chat.database.models.ChatMessage;
 

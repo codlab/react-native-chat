@@ -1,8 +1,9 @@
 package eu.codlab.chat.database.models;
 
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.util.SparseArray;
+
+import androidx.annotation.Nullable;
 
 public enum ChatMessageType {
     CHAT_MESSAGE_TYPE_SENT("text"),
@@ -64,7 +65,7 @@ public enum ChatMessageType {
     public static ChatMessageType fromType(@Nullable String type) {
         if (null != type) {
             for (ChatMessageType in_cache : INFOS) {
-                if(in_cache.getType().equalsIgnoreCase(type)) {
+                if (in_cache.getType().equalsIgnoreCase(type)) {
                     return in_cache;
                 }
             }

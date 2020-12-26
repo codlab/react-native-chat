@@ -1,7 +1,8 @@
 package eu.codlab.chat.ui.views;
 
-import android.support.annotation.NonNull;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
 
 import eu.codlab.chat.R;
 import eu.codlab.chat.database.models.ChatMessageType;

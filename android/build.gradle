@@ -42,8 +42,7 @@ repositories {
 
 dependencies {
     compile 'com.facebook.react:react-native:+'
-
-    compile "com.android.support:recyclerview-v7:${_supportLib}"
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
     annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:4.0.4"
     compile "com.github.Raizlabs.DBFlow:dbflow-core:4.0.4"

@@ -1,10 +1,11 @@
 package eu.codlab.chat.ui.items;
 
-import android.support.annotation.Nullable;
 import android.util.Base64;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.squareup.picasso.Picasso;
 

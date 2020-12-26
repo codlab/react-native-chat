@@ -1,6 +1,5 @@
 package eu.codlab.chat.ui.items;
 
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.TextView;
 

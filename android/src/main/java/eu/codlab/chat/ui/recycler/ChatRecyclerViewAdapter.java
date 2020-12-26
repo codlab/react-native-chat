@@ -1,8 +1,9 @@
 package eu.codlab.chat.ui.recycler;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.raizlabs.android.dbflow.structure.database.FlowCursor;
 

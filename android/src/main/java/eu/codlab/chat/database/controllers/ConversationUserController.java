@@ -1,7 +1,7 @@
 package eu.codlab.chat.database.controllers;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.raizlabs.android.dbflow.sql.language.From;
 import com.raizlabs.android.dbflow.sql.language.Select;
@@ -71,7 +71,7 @@ public class ConversationUserController extends AbstractController<ConversationU
     public void createLink(@NonNull Conversation conversation, @NonNull User user) {
         List<ConversationUser> links = from(select(), conversation, user).queryList();
 
-        if(links.size() == 0) {
+        if (links.size() == 0) {
             ConversationUser conversationUser = new ConversationUser();
             conversationUser.setConversationId(conversation.getId());
             conversationUser.setUserId(user.getUuid());
@@ -84,6 +84,7 @@ public class ConversationUserController extends AbstractController<ConversationU
     private From<ConversationUser> select() {
         return new Select().from(ConversationUser.class);
     }
+
     private From<ConversationUser> delete() {
         return new Select().from(ConversationUser.class);
     }

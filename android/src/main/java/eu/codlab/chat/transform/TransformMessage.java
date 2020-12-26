@@ -1,7 +1,7 @@
 package eu.codlab.chat.transform;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
@@ -72,9 +72,9 @@ public final class TransformMessage {
         if (map.hasKey("additionnal")) message.setAdditionnal(map.getString("additionnal"));
         if (map.hasKey("error")) message.setError(map.getBoolean("error"));
         if (map.hasKey("system")) message.setSystem(map.getBoolean("system"));
-        if (map.hasKey("created_at") && isNull(map,"created_at"))
+        if (map.hasKey("created_at") && !isNull(map, "created_at"))
             message.setCreatedAt(fromDouble(map.getDouble("created_at")));
-        if (map.hasKey("sent_at") && isNull(map,"sent_at"))
+        if (map.hasKey("sent_at") && !isNull(map, "sent_at"))
             message.setSentAt(fromDouble(map.getDouble("sent_at")));
 
         return message;
@@ -113,7 +113,7 @@ public final class TransformMessage {
     private static boolean isNull(@NonNull ReadableMap map, @NonNull String key) {
         try {
             return map.isNull(key);
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return false;

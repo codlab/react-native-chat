@@ -1,6 +1,6 @@
 package eu.codlab.chat.database.models;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
@@ -80,6 +80,7 @@ public class User extends BaseModel {
     public String getAdditionnal() {
         return additionnal;
     }
+
     @NonNull
     public List<Conversation> getConversations() {
         List<Conversation> result = new ArrayList<>();

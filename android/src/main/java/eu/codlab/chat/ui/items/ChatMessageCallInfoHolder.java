@@ -1,8 +1,9 @@
 package eu.codlab.chat.ui.items;
 
-import android.support.annotation.Nullable;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import eu.codlab.chat.R;
 import eu.codlab.chat.database.models.ChatMessage;
@@ -50,7 +51,7 @@ public class ChatMessageCallInfoHolder extends AbstractMessageHolder {
 
         }
 
-        if(null != user) {
+        if (null != user) {
             content.setText(String.format(str, user.getName()));
         } else {
             content.setText(String.format(str, "no user"));

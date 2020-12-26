@@ -1,6 +1,6 @@
 package eu.codlab.chat.database.models;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
@@ -27,6 +27,8 @@ public class KeyValueModel extends BaseModel {
     }
 
     public KeyValueModel(String key, String value) {
+        this();
+
         this.key = key;
         this.value = value;
     }
