@@ -11,6 +11,7 @@ import com.squareup.picasso.Picasso;
 
 import eu.codlab.chat.R;
 import eu.codlab.chat.database.models.ChatMessage;
+import eu.codlab.chat.translation.TranslationController;
 
 public class ChatMessageInteractionHolder extends AbstractMessageHolder {
 
@@ -32,7 +33,15 @@ public class ChatMessageInteractionHolder extends AbstractMessageHolder {
 
     @Override
     public void onBindViewHolder(final ChatMessage message, int position) {
-        content.setText(message.getContent());
+        String message_content = message.getContent();
+
+        if (null != message.getTranslation_key()) {
+            String translation_content = TranslationController.instance.get(message.getTranslation_key());
+            if (null != translation_content && translation_content.length() > 0)
+                message_content = translation_content;
+        }
+
+        content.setText(message_content);
 
         date.setText(message.getCreatedAt().toGMTString());
 

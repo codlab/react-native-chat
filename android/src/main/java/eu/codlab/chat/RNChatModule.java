@@ -27,6 +27,7 @@ import eu.codlab.chat.database.models.User;
 import eu.codlab.chat.transform.TransformConversations;
 import eu.codlab.chat.transform.TransformMessage;
 import eu.codlab.chat.transform.TransformUser;
+import eu.codlab.chat.translation.TranslationController;
 import eu.codlab.chat.utils.FixCursorWindow;
 import eu.codlab.chat.utils.Requery;
 
@@ -107,6 +108,13 @@ public class RNChatModule extends ReactContextBaseJavaModule {
         } else {
             promise.resolve(false);
         }
+    }
+
+    @ReactMethod
+    public void setTranslation(@NonNull String key, @NonNull String content, @NonNull Promise promise) {
+        TranslationController.instance.set(key, content);
+
+        promise.resolve(true);
     }
 
     @ReactMethod

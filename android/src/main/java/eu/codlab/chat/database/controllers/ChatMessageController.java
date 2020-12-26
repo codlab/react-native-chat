@@ -134,6 +134,7 @@ public class ChatMessageController extends AbstractController<ChatMessage, Long>
         message.setState_connectivity_1(cursor.getBooleanOrDefault("state_connectivity_1", false));
         message.setState_connectivity_2(cursor.getBooleanOrDefault("state_connectivity_2", true));
         message.setImage(cursor.getStringOrDefault("image"));
+        message.setTranslation_key(cursor.getStringOrDefault("translation_key"));
 
         long sentAt = cursor.getLongOrDefault("sentAt");
         long createdAt = cursor.getLongOrDefault("createdAt");

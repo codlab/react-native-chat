@@ -5,6 +5,8 @@ export interface Message {
     created_at?: number;
     sent_at?: number;
     local?: boolean;
+    translation_key?: string;
+    additionnal_translation_key?: string;
 }
 export interface MessageImage extends Message {
     image: string;

@@ -35,6 +35,11 @@ var ConversationManager = /** @class */ (function () {
             return ConversationManagerDummy.instance.setSent(uuid);
         return RNChat.setSent(uuid);
     };
+    ConversationManager.prototype.setTranslation = function (key, content) {
+        if (need_dummy)
+            return ConversationManagerDummy.instance.setTranslation(key, content);
+        return RNChat.setTranslation(key, content);
+    };
     ConversationManager.prototype.saveMessage = function (user, conversation, message) {
         if (need_dummy)
             return ConversationManagerDummy.instance.saveMessage(user, conversation, message);

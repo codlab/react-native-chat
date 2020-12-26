@@ -44,4 +44,18 @@ public class DatabaseChat {
         }
     }
 
+    @Migration(version = 5, database = DatabaseChat.class)
+    public static class Migration5 extends AlterTableMigration<ChatMessage> {
+
+        public Migration5(Class<ChatMessage> table) {
+            super(table);
+        }
+
+        @Override
+        public void onPreMigrate() {
+            addColumn(SQLiteType.TEXT, "translation_key");
+            addColumn(SQLiteType.TEXT, "additionnal_translation_key");
+        }
+    }
+
 }

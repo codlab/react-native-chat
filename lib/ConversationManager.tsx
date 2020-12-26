@@ -42,6 +42,11 @@ export default class ConversationManager {
         return RNChat.setSent(uuid);
     }
 
+    setTranslation(key: string, content: string): Promise<boolean> {
+        if(need_dummy) return ConversationManagerDummy.instance.setTranslation(key, content);
+        return RNChat.setTranslation(key, content);
+    }
+
     saveMessage(user: User, conversation: Conversation, message: Message): Promise<boolean> {
         if(need_dummy) return ConversationManagerDummy.instance.saveMessage(user, conversation, message);
         return RNChat.saveMessage(user, conversation, message);

@@ -73,6 +73,14 @@ public class ChatMessage extends BaseModel {
     @Column
     private long conversationId;
 
+    @Nullable
+    @Column
+    private String translation_key;
+
+    @Nullable
+    @Column
+    private String additionnal_translation_key;
+
     @Column(defaultValue = "")
     private String uuid;
 
@@ -83,6 +91,8 @@ public class ChatMessage extends BaseModel {
         createdAt = new Date();
         sentAt = null;
         sender = "";
+        translation_key = null;
+        additionnal_translation_key = null;
     }
 
     public ChatMessage(Conversation conversation, ChatMessageType type, String uuid, String content, User sender) {
@@ -208,6 +218,24 @@ public class ChatMessage extends BaseModel {
         return state_connectivity_1;
     }
 
+    public void setTranslation_key(@Nullable String translation_key) {
+        this.translation_key = translation_key;
+    }
+
+    @Nullable
+    public String getTranslation_key() {
+        return translation_key;
+    }
+
+    @Nullable
+    public String getAdditionnal_translation_key() {
+        return additionnal_translation_key;
+    }
+
+    public void setAdditionnal_translation_key(@Nullable String additionnal_translation_key) {
+        this.additionnal_translation_key = additionnal_translation_key;
+    }
+
     @Override
     public String toString() {
         return "ChatMessage{" +
@@ -228,6 +256,8 @@ public class ChatMessage extends BaseModel {
                 ", conversationId=" + conversationId +
                 ", uuid='" + uuid + '\'' +
                 ", sender='" + sender + '\'' +
+                ", translation_key='" + translation_key + '\'' +
+                ", additionnal_translation_key'" + additionnal_translation_key + '\'' +
                 '}';
     }
 

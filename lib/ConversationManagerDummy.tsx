@@ -36,7 +36,11 @@ export default class ConversationManagerDummy {
     }
 
     setSent(uuid: string) {
-        return Promise.reject("can't set ent");
+        return Promise.reject("can't set sent");
+    }
+
+    setTranslation(key: string, content: string): Promise<boolean> {
+        return Promise.reject("can't set translation " + key+" "+content);
     }
 
     requery(): Promise<boolean> {

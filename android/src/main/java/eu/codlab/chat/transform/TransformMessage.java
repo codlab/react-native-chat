@@ -34,6 +34,7 @@ public final class TransformMessage {
         map.putBoolean("local", message.isLocal());
         map.putString("type", message.getMessageType().getType());
         map.putString("additionnal", message.getAdditionnal());
+        map.putString("translation_key", message.getTranslation_key());
         if (null != message.getSentAt()) map.putDouble("sent_at", message.getSentAt().getTime());
         if (null != message.getCreatedAt())
             map.putDouble("created_at", message.getCreatedAt().getTime());
@@ -58,6 +59,8 @@ public final class TransformMessage {
         if (map.hasKey("image")) message.setImage(map.getString("image"));
         if (map.hasKey("state_1")) message.setState_1(map.getString("state_1"));
         if (map.hasKey("state_2")) message.setState_2(map.getString("state_2"));
+        if (map.hasKey("translation_key")) message.setTranslation_key(map.getString("translation_key"));
+        if (map.hasKey("additionnal_translation_key")) message.setAdditionnal_translation_key(map.getString("additionnal_translation_key"));
         if (map.hasKey("state_connectivity_1"))
             message.setState_connectivity_1(map.getBoolean("state_connectivity_1"));
         if (map.hasKey("state_connectivity_2"))

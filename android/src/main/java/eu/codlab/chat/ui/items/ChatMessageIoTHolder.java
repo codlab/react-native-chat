@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import eu.codlab.chat.R;
 import eu.codlab.chat.database.models.ChatMessage;
+import eu.codlab.chat.translation.TranslationController;
 
 public class ChatMessageIoTHolder extends AbstractMessageHolder {
 
@@ -49,9 +50,23 @@ public class ChatMessageIoTHolder extends AbstractMessageHolder {
 
     @Override
     public void onBindViewHolder(final ChatMessage message, int position) {
-        content.setText(message.getContent());
+        String message_content = message.getContent();
+        String message_additionnal = message.getAdditionnal();
 
-        additionnal.setText(message.getAdditionnal());
+        if (null != message.getTranslation_key()) {
+            String translation_content = TranslationController.instance.get(message.getTranslation_key());
+            if (null != translation_content && translation_content.length() > 0)
+                message_content = translation_content;
+        }
+
+        if (null != message.getAdditionnal_translation_key()) {
+            String translation_additionnal = TranslationController.instance.get(message.getAdditionnal_translation_key());
+            if (null != translation_additionnal && translation_additionnal.length() > 0)
+                message_additionnal = translation_additionnal;
+        }
+
+        content.setText(message_content);
+        additionnal.setText(message_additionnal);
 
         state_1.setText(message.getState_1());
         state_2.setText(message.getState_2());

@@ -22,7 +22,10 @@ var ConversationManagerDummy = /** @class */ (function () {
         return Promise.reject("can send message");
     };
     ConversationManagerDummy.prototype.setSent = function (uuid) {
-        return Promise.reject("can't set ent");
+        return Promise.reject("can't set sent");
+    };
+    ConversationManagerDummy.prototype.setTranslation = function (key, content) {
+        return Promise.reject("can't set translation " + key + " " + content);
     };
     ConversationManagerDummy.prototype.requery = function () {
         return Promise.resolve(false);
