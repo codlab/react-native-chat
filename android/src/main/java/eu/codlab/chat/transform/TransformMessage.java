@@ -84,7 +84,7 @@ public final class TransformMessage {
     }
 
     private static ChatMessageType calculateType(@NonNull ReadableMap map) {
-        if (hasKeys(map, "system", "error") && (!hasKeys(map, "local") || !map.getBoolean("local"))) {
+        if (hasKeys(map, "system", "error") && (map.getBoolean("system") || map.getBoolean("error"))) {
             return ChatMessageType.CHAT_INTERACTION;
         } else if (hasKeys(map, "state_1", "state_2", "state_connectivity_1", "state_connectivity_2")) {
             return ChatMessageType.CHAT_IOT;

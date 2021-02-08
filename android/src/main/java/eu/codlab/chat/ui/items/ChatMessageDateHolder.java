@@ -27,8 +27,17 @@ public class ChatMessageDateHolder extends AbstractMessageHolder {
         int mm = (yyyymmdd / 100) % 100;
         int dd = yyyymmdd % 100;
 
+        String day = ""+dd;
+        if(day.length() < 2) day = "0" + day;
+
+        String month = ""+mm;
+        if(month.length() < 2) month = "0" + month;
+
+        String year = ""+yyyy;
+        while(year.length() < 4) year = "0" + year;
+
         if (null != content) {
-            content.setText(dd + " " + mm + " " + yyyy);
+            content.setText(day + " " + month + " " + year);
         }
     }
 }
