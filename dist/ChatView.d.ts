@@ -28,5 +28,5 @@ export default class ChatView extends Component<ChatViewProps, ChatViewState> {
     componentDidMount(): void;
     _sendCallReturn(command: any): Promise<unknown>;
     _onCallReturn: (event: any) => void;
-    render(): JSX.Element;
+    render(): any;
 }
