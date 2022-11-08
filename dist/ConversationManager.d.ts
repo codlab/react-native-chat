@@ -1,6 +1,9 @@
 import { User } from '.';
 import Conversation from './Conversation';
 import { Message } from './Message';
+export interface Holder {
+    [key: string]: string;
+}
 export default class ConversationManager {
     constructor();
     getUsers(): Promise<User[]>;
@@ -10,6 +13,7 @@ export default class ConversationManager {
     addUserToConversation(user: User, conversation: Conversation): Promise<boolean>;
     setSent(uuid: string): Promise<boolean>;
     setTranslation(key: string, content: string): Promise<boolean>;
+    setTranslations(keyValues: Holder): Promise<boolean>;
     saveMessage(user: User, conversation: Conversation, message: Message): Promise<boolean>;
     requery(): Promise<boolean>;
 }

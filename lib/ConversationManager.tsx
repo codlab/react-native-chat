@@ -7,6 +7,10 @@ const { RNChat } = NativeModules;
 
 const need_dummy = !RNChat || !RNChat.getUsers;
 
+export interface Holder {
+    [key: string]: string
+}
+
 export default class ConversationManager {
     constructor() {
 
@@ -45,6 +49,11 @@ export default class ConversationManager {
     setTranslation(key: string, content: string): Promise<boolean> {
         if(need_dummy) return ConversationManagerDummy.instance.setTranslation(key, content);
         return RNChat.setTranslation(key, content);
+    }
+
+    setTranslations(keyValues: Holder): Promise<boolean> {
+        if(need_dummy) return ConversationManagerDummy.instance.setTranslations(keyValues);
+        return RNChat.setTranslations(keyValues);
     }
 
     saveMessage(user: User, conversation: Conversation, message: Message): Promise<boolean> {

@@ -1,6 +1,7 @@
 import { NativeModules } from 'react-native';
 import { User } from '.';
 import Conversation from './Conversation';
+import { Holder } from './ConversationManager';
 import { Message } from './Message';
 const { RNChat } = NativeModules;
 
@@ -41,6 +42,10 @@ export default class ConversationManagerDummy {
 
     setTranslation(key: string, content: string): Promise<boolean> {
         return Promise.reject("can't set translation " + key+" "+content);
+    }
+
+    setTranslations(holder: Holder): Promise<boolean> {
+        return Promise.reject("can't set translations");
     }
 
     requery(): Promise<boolean> {

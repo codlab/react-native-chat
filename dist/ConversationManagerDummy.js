@@ -27,6 +27,9 @@ var ConversationManagerDummy = /** @class */ (function () {
     ConversationManagerDummy.prototype.setTranslation = function (key, content) {
         return Promise.reject("can't set translation " + key + " " + content);
     };
+    ConversationManagerDummy.prototype.setTranslations = function (holder) {
+        return Promise.reject("can't set translations");
+    };
     ConversationManagerDummy.prototype.requery = function () {
         return Promise.resolve(false);
     };

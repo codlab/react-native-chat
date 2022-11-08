@@ -2,10 +2,12 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -24,17 +26,20 @@ var ChatView = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         _this._UiManager = UIManager;
         _this._nextRequestId = 1;
-        _this._requestMap = new Map();
+        _this._requestMap = {};
         _this._onCallReturn = function (event) {
             var _a = event.nativeEvent, requestId = _a.requestId, result = _a.result, error = _a.error;
             var promise = _this._requestMap[requestId];
+            _this._requestMap[requestId] = undefined;
+            delete _this._requestMap[requestId];
+            if (!promise)
+                return;
             if (result) {
                 promise.resolve(result);
             }
             else {
                 promise.reject(error);
             }
-            _this._requestMap.delete(requestId);
         };
         _this._view = null;
         _this._handler = null;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 export interface ChatViewState {
 }
 export interface ChatViewProps {
@@ -14,19 +14,23 @@ export interface Holder {
     resolve: Resolve;
     reject: Reject;
 }
+interface HolderDeletable {
+    [key: number]: Holder | undefined;
+}
 /**
  * Composes `View`.
  */
 export default class ChatView extends Component<ChatViewProps, ChatViewState> {
     static defaultProps: {};
     _UiManager: any;
-    _view: React.Component | null;
+    _view: any | null;
     _handler: null | number;
     _nextRequestId: number;
-    _requestMap: Map<number, Holder>;
+    _requestMap: HolderDeletable;
     constructor(props: ChatViewProps);
     componentDidMount(): void;
     _sendCallReturn(command: any): Promise<unknown>;
     _onCallReturn: (event: any) => void;
-    render(): any;
+    render(): JSX.Element;
 }
+export {};

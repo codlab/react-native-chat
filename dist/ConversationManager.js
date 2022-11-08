@@ -40,6 +40,11 @@ var ConversationManager = /** @class */ (function () {
             return ConversationManagerDummy.instance.setTranslation(key, content);
         return RNChat.setTranslation(key, content);
     };
+    ConversationManager.prototype.setTranslations = function (keyValues) {
+        if (need_dummy)
+            return ConversationManagerDummy.instance.setTranslations(keyValues);
+        return RNChat.setTranslations(keyValues);
+    };
     ConversationManager.prototype.saveMessage = function (user, conversation, message) {
         if (need_dummy)
             return ConversationManagerDummy.instance.saveMessage(user, conversation, message);
