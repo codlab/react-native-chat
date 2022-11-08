@@ -1,11 +1,11 @@
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.0'
+        classpath 'com.android.tools.build:gradle:7.0.2'
     }
 }
 
@@ -37,18 +37,17 @@ repositories {
     google()
     mavenCentral()
     maven { url "https://jitpack.io" }
-    jcenter()
 }
 
 dependencies {
-    compile 'com.facebook.react:react-native:+'
+    implementation 'com.facebook.react:react-native:+'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
-    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:4.0.4"
-    compile "com.github.Raizlabs.DBFlow:dbflow-core:4.0.4"
-    compile "com.github.Raizlabs.DBFlow:dbflow:4.0.4"
+    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:4.2.4"
+    implementation "com.github.Raizlabs.DBFlow:dbflow-core:4.2.4"
+    implementation "com.github.Raizlabs.DBFlow:dbflow:4.2.4"
 
-    compile "com.squareup.picasso:picasso:2.5.2"
+    implementation "com.squareup.picasso:picasso:2.5.2"
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'net.danlew:android.joda:2.10.6'
 }
