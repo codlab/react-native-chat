@@ -10,6 +10,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableMapKeySetIterator;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
@@ -113,6 +114,17 @@ public class RNChatModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void setTranslation(@NonNull String key, @NonNull String content, @NonNull Promise promise) {
         TranslationController.instance.set(key, content);
+
+        promise.resolve(true);
+    }
+
+    @ReactMethod
+    public void setTranslations(@NonNull ReadableMap KeyValues, @NonNull Promise promise) {
+        ReadableMapKeySetIterator iterator = KeyValues.keySetIterator();
+        while (iterator.hasNextKey()) {
+            String key = iterator.nextKey();
+            TranslationController.instance.set(key, KeyValues.getString(key));
+        }
 
         promise.resolve(true);
     }
